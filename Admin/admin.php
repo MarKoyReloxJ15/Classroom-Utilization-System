@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="adminStyle.css">
-    <link rel="icon" href="/images/rsuLogo.png" type="image/x-icon"/>
+    <link rel="icon" href="images/rsuLogo.png" type="image/x-icon"/>
 
     
 
@@ -111,7 +111,7 @@
                         
                       
                       <div class="overflowDiv"><!--this is the table for the home content for overflow-->
-                      <button class="fulscren" title="Full Screen"><a href="/Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" target="_self"><img src="images/expand.png" alt=""></a></button>     
+                      <button class="fulscren" title="Full Screen"><a href="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" target="_self"><img src="images/expand.png" alt=""></a></button>     
                           <iframe src="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" frameborder="0" style="width: 100%;height:100%;">    
                                                  
                            </iframe>

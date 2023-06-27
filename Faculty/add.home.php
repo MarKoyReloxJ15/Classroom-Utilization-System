@@ -55,7 +55,7 @@
       if ($insert_Result) {
         echo "<script type='text/javascript'>
                         alert('New schedule added successfuly');
-                          window.location='tablelist.php';
+                          window.location='HomeTableMainFunc.php';
                             </script>";
       } else {
         echo "<script type='text/javascript'>

@@ -1,4 +1,7 @@
 <?php
+        include_once("navbar.php");
+    ?>
+<?php
 
 // php select option value from database
 
@@ -342,9 +345,7 @@ while($row2 = mysqli_fetch_array($result2))
 		</div>		
     </div>
 
-    <?php
-        include_once("navbar.php");
-    ?>
+    
     </body>
 	
 	

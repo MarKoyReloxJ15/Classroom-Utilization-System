@@ -64,7 +64,7 @@
             <li ><a href="tablelist.php"><span class="glyphicon glyphicon-calendar"></span> Schedule</a></li>
             <li><a href="home.php"><span class="glyphicon glyphicon-plus-sign"></span> Add Schedule</a></li>
             <li><a href="addsubject.php"><span class="glyphicon glyphicon-plus-sign"></span> Subjects</a></li>
-            <li><a href="addfaculty.php"><span class="glyphicon glyphicon-plus-sign"></span> Faculty</a></li> 
+            <!-- <li><a href="addfaculty.php"><span class="glyphicon glyphicon-plus-sign"></span> Faculty</a></li>  -->
             <!-- <li><a href="addcourse.php"><span class="glyphicon glyphicon-plus-sign"></span> Course</a></li> -->
             <li><a href="addroom.php"><span class="glyphicon glyphicon-asterisk"></span> Room</a></li>
             <!-- <li><a href="addtime.php"><span class="glyphicon glyphicon-time"></span> Time</a></li> -->
