@@ -32,7 +32,8 @@
                                 <li class="tablinks" onclick="openTab(event, 'Blocks')">Blocks</li>
                                 <li class="tablinks" onclick="openTab(event, 'Schedules')">Schedules</li>
                                 <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructors</li>
-                                <li class="tablinks" onclick="openTab(event, 'Logout')">Logout</li>
+                                <li class="tablinks" onclick="openTab(event, 'List')">List</li>
+                                <li class="tablinks" ><a href="../../adminLogin.php" style="text-decoration: none;">Logout</a></li>
                             </ul>
                     </div>
             </div>
@@ -56,7 +57,8 @@
                                 <li class="tablinks" onclick="openTab(event, 'Blocks')">Blocks</li>
                                 <li class="tablinks" onclick="openTab(event, 'Schedules')">Schedules</li>
                                 <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructors</li>
-                                <li class="tablinks" onclick="openTab(event, 'Logout')">Logout</li>
+                                <li class="tablinks" onclick="openTab(event, 'List')">List</li>
+                                <li class="tablinks" ><a href="../../adminLogin.php" style="text-decoration: none;color:black">Logout</a></li>
                             </ul>
                     </div>
 
@@ -143,20 +145,36 @@
                     </div>
                     <!--           end of instructor section  -->
 
+                    <!-- List Area                    -->
 
+                    <div id="List" class="tabcontent InstructSec" style="display: none;">
+                      <h1 style="text-align: center;margin-top: 0;padding-top: 0;">Classroom Utilization Management System</h1>
+                        <div><!--former form----->
+                          
+                        <div class="overflowDiv">
+                        <iframe src="Scheduling_SystemSimple PHP\schedulingsystem\list.php" frameborder="0" style="width: 100%;height:100%;">                                
+                            </iframe>
+
+
+                        </div>
+
+                    </div>
+                    </div>
+
+                    <!-- end of list area            -->
 
 
 
 
                      <!--        logout section    -->
 
-                     <div id="Logout" class="tabcontent LogoutSec" style="display: none;">
+                     <!-- <div id="Logout" class="tabcontent LogoutSec" style="display: none;">
                       <h1 style="text-align: center;margin-top: 0;padding-top: 0;">Classroom Utilization Management System</h1>
                         <div>
                          
   
                     </div>
-                    </div> 
+                    </div>  -->
                      <!--      end of login section  -->
 
 

@@ -3,7 +3,7 @@ include_once("header.php");
 ?>
 
 <?php
-include 'heartbeat.php';
+//include 'heartbeat.php';
 ?>
 
 
@@ -30,86 +30,7 @@ include 'heartbeat.php';
     </style>
 </head>
 
-    <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        var searchBtn = document.getElementById("searchBtn");
-        searchBtn.addEventListener("click", function() {
-            var searchValue = document.getElementById("search").value.toLowerCase();
-            var rows = document.querySelectorAll("tbody tr");
-            rows.forEach(function(row) {
-                var cells = row.getElementsByTagName("td");
-                var found = false;
-                Array.from(cells).forEach(function(cell) {
-                    if (cell.textContent.toLowerCase().includes(searchValue)) {
-                        found = true;
-                    }
-                });
-                if (found) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        });
-
-        var refreshBtn = document.getElementById("refreshBtn");
-        refreshBtn.addEventListener("click", function() {
-            location.reload();
-        });
-
-        var startTimeHeader = document.querySelector("thead th:nth-child(5)");
-        startTimeHeader.addEventListener("click", function() {
-            sortRowsByStartTime();
-        });
-
-        function sortRowsByStartTime() {
-            var tableBody = document.querySelector("tbody");
-            var rows = Array.from(tableBody.getElementsByTagName("tr"));
-
-            rows.sort(function(rowA, rowB) {
-                var startTimeA = rowA.querySelector("td:nth-child(5)").textContent.trim();
-                var startTimeB = rowB.querySelector("td:nth-child(5)").textContent.trim();
-
-                var timeA = new Date("1970/01/01 " + startTimeA);
-                var timeB = new Date("1970/01/01 " + startTimeB);
-
-                return timeA - timeB;
-            });
-
-            rows.forEach(function(row) {
-                tableBody.appendChild(row);
-            });
-        }
-
-        var amBtn = document.getElementById("amBtn");
-        var pmBtn = document.getElementById("pmBtn");
-
-        amBtn.addEventListener("click", function() {
-            filterRowsByTime("AM");
-        });
-
-        pmBtn.addEventListener("click", function() {
-            filterRowsByTime("PM");
-        });
-
-        function filterRowsByTime(time) {
-            var rows = document.querySelectorAll("tbody tr");
-            rows.forEach(function(row) {
-                var startTime = row.querySelector("td:nth-child(5)").textContent.trim();
-                var isAM = startTime.endsWith("AM");
-                var isPM = startTime.endsWith("PM");
-
-                if ((time === "AM" && isAM) || (time === "PM" && isPM)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        }
-
-        sortRowsByStartTime();
-    });
-</script>
+   
 
 </head>
 
@@ -207,9 +128,9 @@ function statusFunc($faculty){
                                 // echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:1%;'>Active $timeDiffMinutes min ago</div>";
                             }
                         } else {
-                            echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                           // echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
 
-                            echo "No results found.";
+                            echo "No Schedule found.";
                         }
                         
                         // Free the result set
@@ -318,9 +239,9 @@ function createScheduleTable($day, $conn) {
         echo "</table></div>";
     }
 
-    $currentDay = date('l');
+    $currentDay = date('l');// insert this to get the current day 
 
-    createScheduleTable(  $currentDay, $conn);
+    createScheduleTable( $currentDay, $conn);
 
 ?>
 
@@ -336,18 +257,16 @@ function createScheduleTable($day, $conn) {
 
 <!-- Add Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="heartbeat.js"></script>
+<!-- <script src="heartbeat.js"></script> -->
 
-<script>
-          $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
 
+
+<script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         var searchBtn = document.getElementById("searchBtn");
         searchBtn.addEventListener("click", function() {
             var searchValue = document.getElementById("search").value.toLowerCase();
-            var rows = document.querySelectorAll("#scheduleTable tbody tr");
+            var rows = document.querySelectorAll("tbody tr");
             rows.forEach(function(row) {
                 var cells = row.getElementsByTagName("td");
                 var found = false;
@@ -363,8 +282,65 @@ function createScheduleTable($day, $conn) {
                 }
             });
         });
+
+        var refreshBtn = document.getElementById("refreshBtn");
+        refreshBtn.addEventListener("click", function() {
+            location.reload();
+        });
+
+        var startTimeHeader = document.querySelector("thead th:nth-child(5)");
+        startTimeHeader.addEventListener("click", function() {
+            sortRowsByStartTime();
+        });
+
+        function sortRowsByStartTime() {
+            var tableBody = document.querySelector("tbody");
+            var rows = Array.from(tableBody.getElementsByTagName("tr"));
+
+            rows.sort(function(rowA, rowB) {
+                var startTimeA = rowA.querySelector("td:nth-child(5)").textContent.trim();
+                var startTimeB = rowB.querySelector("td:nth-child(5)").textContent.trim();
+
+                var timeA = new Date("1970/01/01 " + startTimeA);
+                var timeB = new Date("1970/01/01 " + startTimeB);
+
+                return timeA - timeB;
+            });
+
+            rows.forEach(function(row) {
+                tableBody.appendChild(row);
+            });
+        }
+
+        // var amBtn = document.getElementById("amBtn");
+        // var pmBtn = document.getElementById("pmBtn");
+
+        // amBtn.addEventListener("click", function() {
+        //     filterRowsByTime("AM");
+        // });
+
+        // pmBtn.addEventListener("click", function() {
+        //     filterRowsByTime("PM");
+        // });
+
+        // function filterRowsByTime(time) {
+        //     var rows = document.querySelectorAll("tbody tr");
+        //     rows.forEach(function(row) {
+        //         var startTime = row.querySelector("td:nth-child(5)").textContent.trim();
+        //         var isAM = startTime.endsWith("AM");
+        //         var isPM = startTime.endsWith("PM");
+
+        //         if ((time === "AM" && isAM) || (time === "PM" && isPM)) {
+        //             row.style.display = "";
+        //         } else {
+        //             row.style.display = "none";
+        //         }
+        //     });
+        // }
+
+        sortRowsByStartTime();
     });
-          </script>
+</script>
 </body>
 </html>
 <?php 

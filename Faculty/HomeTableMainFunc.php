@@ -318,7 +318,9 @@ function createScheduleTable($day, $conn) {
         echo "</table></div>";
     }
 
-    createScheduleTable("Monday", $conn);
+    $currentDay = date('l');// insert this to get the current day 
+
+    createScheduleTable( $currentDay, $conn);
 
 ?>
 
