@@ -106,7 +106,7 @@
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="pull-left">Blocks Details </h2>
-                        <a href="create.php" class="btn btn-success pull-right">Add New Instructor</a>
+                        <a href="create.php" class="btn btn-success pull-right">Add New Blocks</a>
                     </div>
                     <?php
                     // Include config file

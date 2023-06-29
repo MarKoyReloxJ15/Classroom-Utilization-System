@@ -207,9 +207,9 @@ function statusFunc($faculty){
                                 // echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:1%;'>Active $timeDiffMinutes min ago</div>";
                             }
                         } else {
-                            echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                            //echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
 
-                            echo "No results found.";
+                            echo "No Schedule found.";
                         }
                         
                         // Free the result set

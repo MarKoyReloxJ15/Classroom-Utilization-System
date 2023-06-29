@@ -41,8 +41,9 @@
     </style>
 </head>
 <body>
-    <h2>Select an option</h2>
+    
     <form method="POST" action="redirect.php">
+    <h2>Select an option</h2>
         <input type="radio" name="option" value="option1"> Admin<br>
         <input type="radio" name="option" value="option2"> Faculty<br>
         <input type="radio" name="option" value="option3"> Student<br><br>

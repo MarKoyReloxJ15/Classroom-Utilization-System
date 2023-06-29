@@ -3,7 +3,7 @@ include_once("header.php");
 ?>
 
 <?php
-include 'heartbeat.php';
+//include 'heartbeat.php';
 ?>
 
 
@@ -18,6 +18,9 @@ include 'heartbeat.php';
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
+        /* html, body {
+    background-color: transparent;
+  } */
 
         td a {
         margin  : 10%; /* Adjust the value as needed */
@@ -319,7 +322,7 @@ function createScheduleTable($day, $conn) {
     }
 
     $currentDay = date('l');
-
+   // createScheduleTable(  "Monday", $conn);
     createScheduleTable(  $currentDay, $conn);
 
 ?>
@@ -336,7 +339,7 @@ function createScheduleTable($day, $conn) {
 
 <!-- Add Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="heartbeat.js"></script>
+<!-- <script src="heartbeat.js"></script> -->
 
 <script>
           $(document).ready(function() {

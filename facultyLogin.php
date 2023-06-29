@@ -89,6 +89,7 @@
             </div>
             
             <input type="submit" value="Submit">
+            <a href="student_register.php">Register</a>
         </form>
     </div>
 </body>
@@ -126,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // echo "$password";
 
             // Verify the password
-            if ($password === $hashedPassword) {
+            if (password_verify($password, $hashedPassword))  {
                 // Set session variables
                 $_SESSION['username'] = $username;
 
