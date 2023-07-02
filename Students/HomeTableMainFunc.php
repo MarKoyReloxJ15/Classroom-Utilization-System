@@ -1,6 +1,4 @@
-<?php
-include_once("header.php");
-?>
+
 
 <?php
 //include 'heartbeat.php';
@@ -13,7 +11,7 @@ include_once("header.php");
 <head>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -27,14 +25,27 @@ include_once("header.php");
             background-color: rgb(192,192,192,.2);
         }
 
+        @media (max-width: 800px) {
+            .hide-column {
+                display: none;
+            }
+            table td{
+                font-size: 15px;
+            }
+
+        }
+
     </style>
 </head>
 
    
 
-</head>
+<?php
+include 'logo.php';
+?>
 
 <body><br>
+
 
 
 
@@ -186,8 +197,8 @@ function createScheduleTable($day, $conn) {
                 <tr>
                 <th>Room</th>
                 <th>Faculty</th>
-                <th>Block</th>
-                <th>Subject</th>
+                <th class='hide-column'>Block</th>
+                <th class='hide-column'>Subject</th>
                 <th>Time</th>
                 
                
@@ -200,8 +211,8 @@ function createScheduleTable($day, $conn) {
             echo "<tr>";
             echo "<td style=\"text-align: center;\">" . ($row['room'] !== null ? $row['room'] : '-----') . "</td>";
             echo "<td style=\"text-align: center;\">" . ($row['faculty'] !== null ? $row['faculty'] : '-----') . "</td>";
-            echo "<td style=\"text-align: center;\">" . ($row['blocks'] !== null ? $row['blocks'] : '-----') . "</td>";
-            echo "<td style=\"text-align: center;\">" . ($row['subject'] !== null ? $row['subject'] : '-----') . "</td>";
+            echo "<td style=\"text-align: center;\" class='hide-column'>" . ($row['blocks'] !== null ? $row['blocks'] : '-----') . "</td>";
+            echo "<td style=\"text-align: center;\" class='hide-column'>" . ($row['subject'] !== null ? $row['subject'] : '-----') . "</td>";
             
             echo "<td style='   text-align: center;'>";
 

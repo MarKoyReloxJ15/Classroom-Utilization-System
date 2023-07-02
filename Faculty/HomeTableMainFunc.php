@@ -13,7 +13,7 @@ include 'heartbeat.php';
 <head>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -27,94 +27,26 @@ include 'heartbeat.php';
             background-color: rgb(192,192,192,.2);
         }
 
+        @media (max-width: 800px) {
+            .hide-column {
+                display: none;
+            }
+            table td{
+                font-size: 15px;
+            }
+
+        }
+
+
     </style>
 </head>
 
-    <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        var searchBtn = document.getElementById("searchBtn");
-        searchBtn.addEventListener("click", function() {
-            var searchValue = document.getElementById("search").value.toLowerCase();
-            var rows = document.querySelectorAll("tbody tr");
-            rows.forEach(function(row) {
-                var cells = row.getElementsByTagName("td");
-                var found = false;
-                Array.from(cells).forEach(function(cell) {
-                    if (cell.textContent.toLowerCase().includes(searchValue)) {
-                        found = true;
-                    }
-                });
-                if (found) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        });
+<?php
+include 'logo.php';
+?>
 
-        var refreshBtn = document.getElementById("refreshBtn");
-        refreshBtn.addEventListener("click", function() {
-            location.reload();
-        });
-
-        var startTimeHeader = document.querySelector("thead th:nth-child(5)");
-        startTimeHeader.addEventListener("click", function() {
-            sortRowsByStartTime();
-        });
-
-        function sortRowsByStartTime() {
-            var tableBody = document.querySelector("tbody");
-            var rows = Array.from(tableBody.getElementsByTagName("tr"));
-
-            rows.sort(function(rowA, rowB) {
-                var startTimeA = rowA.querySelector("td:nth-child(5)").textContent.trim();
-                var startTimeB = rowB.querySelector("td:nth-child(5)").textContent.trim();
-
-                var timeA = new Date("1970/01/01 " + startTimeA);
-                var timeB = new Date("1970/01/01 " + startTimeB);
-
-                return timeA - timeB;
-            });
-
-            rows.forEach(function(row) {
-                tableBody.appendChild(row);
-            });
-        }
-
-        var amBtn = document.getElementById("amBtn");
-        var pmBtn = document.getElementById("pmBtn");
-
-        amBtn.addEventListener("click", function() {
-            filterRowsByTime("AM");
-        });
-
-        pmBtn.addEventListener("click", function() {
-            filterRowsByTime("PM");
-        });
-
-        function filterRowsByTime(time) {
-            var rows = document.querySelectorAll("tbody tr");
-            rows.forEach(function(row) {
-                var startTime = row.querySelector("td:nth-child(5)").textContent.trim();
-                var isAM = startTime.endsWith("AM");
-                var isPM = startTime.endsWith("PM");
-
-                if ((time === "AM" && isAM) || (time === "PM" && isPM)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        }
-
-        sortRowsByStartTime();
-    });
-</script>
-
-</head>
 
 <body><br>
-
 
 
 <?php
@@ -260,13 +192,13 @@ function createScheduleTable($day, $conn) {
     
 
 
-        echo "<div class='container'><table width='' class='table table-bordered' border='1'>
+        echo "<div class='container'><table width='' class='table table-bordered theTable' border='1'>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
                 <th>Room</th>
                 <th>Faculty</th>
-                <th>Block</th>
-                <th>Subject</th>
+                <th class='hide-column'>Block</th>
+                <th class='hide-column'>Subject</th>
                 <th>Time</th>
                 
                
@@ -279,8 +211,8 @@ function createScheduleTable($day, $conn) {
             echo "<tr>";
             echo "<td style=\"text-align: center;\">" . ($row['room'] !== null ? $row['room'] : '-----') . "</td>";
             echo "<td style=\"text-align: center;\">" . ($row['faculty'] !== null ? $row['faculty'] : '-----') . "</td>";
-            echo "<td style=\"text-align: center;\">" . ($row['blocks'] !== null ? $row['blocks'] : '-----') . "</td>";
-            echo "<td style=\"text-align: center;\">" . ($row['subject'] !== null ? $row['subject'] : '-----') . "</td>";
+            echo "<td style=\"text-align: center;\" class='hide-column'>" . ($row['blocks'] !== null ? $row['blocks'] : '-----') . "</td>";
+            echo "<td style=\"text-align: center;\" class='hide-column'>" . ($row['subject'] !== null ? $row['subject'] : '-----') . "</td>";
             
             echo "<td style='   text-align: center;'>";
 
@@ -339,15 +271,21 @@ function createScheduleTable($day, $conn) {
 <script src="heartbeat.js"></script>
 
 <script>
-          $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
 
-    document.addEventListener("DOMContentLoaded", function() {
+// if (window.innerWidth <= 600) {
+//     var elements = document.querySelectorAll('.hide-column');
+//     elements.forEach(function(element) {
+//             element.style.display = 'none';
+//         });
+//   }
+
+
+
+         document.addEventListener("DOMContentLoaded", function() {
         var searchBtn = document.getElementById("searchBtn");
         searchBtn.addEventListener("click", function() {
             var searchValue = document.getElementById("search").value.toLowerCase();
-            var rows = document.querySelectorAll("#scheduleTable tbody tr");
+            var rows = document.querySelectorAll("tbody tr");
             rows.forEach(function(row) {
                 var cells = row.getElementsByTagName("td");
                 var found = false;
@@ -363,7 +301,67 @@ function createScheduleTable($day, $conn) {
                 }
             });
         });
+
+        var refreshBtn = document.getElementById("refreshBtn");
+        refreshBtn.addEventListener("click", function() {
+            location.reload();
+        });
+
+        var startTimeHeader = document.querySelector("thead th:nth-child(5)");
+        startTimeHeader.addEventListener("click", function() {
+            sortRowsByStartTime();
+        });
+
+        function sortRowsByStartTime() {
+            var tableBody = document.querySelector("tbody");
+            var rows = Array.from(tableBody.getElementsByTagName("tr"));
+
+            rows.sort(function(rowA, rowB) {
+                var startTimeA = rowA.querySelector("td:nth-child(5)").textContent.trim();
+                var startTimeB = rowB.querySelector("td:nth-child(5)").textContent.trim();
+
+                var timeA = new Date("1970/01/01 " + startTimeA);
+                var timeB = new Date("1970/01/01 " + startTimeB);
+
+                return timeA - timeB;
+            });
+
+            rows.forEach(function(row) {
+                tableBody.appendChild(row);
+            });
+        }
+
+        // var amBtn = document.getElementById("amBtn");
+        // var pmBtn = document.getElementById("pmBtn");
+
+        // amBtn.addEventListener("click", function() {
+        //     filterRowsByTime("AM");
+        // });
+
+        // pmBtn.addEventListener("click", function() {
+        //     filterRowsByTime("PM");
+        // });
+
+        // function filterRowsByTime(time) {
+        //     var rows = document.querySelectorAll("tbody tr");
+        //     rows.forEach(function(row) {
+        //         var startTime = row.querySelector("td:nth-child(5)").textContent.trim();
+        //         var isAM = startTime.endsWith("AM");
+        //         var isPM = startTime.endsWith("PM");
+
+        //         if ((time === "AM" && isAM) || (time === "PM" && isPM)) {
+        //             row.style.display = "";
+        //         } else {
+        //             row.style.display = "none";
+        //         }
+        //     });
+        // }
+
+        sortRowsByStartTime();
     });
+
+
+    
           </script>
 </body>
 </html>

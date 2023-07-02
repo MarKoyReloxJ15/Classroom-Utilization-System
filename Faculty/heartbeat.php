@@ -23,7 +23,7 @@ if(isset($_SESSION['username'])) {
 
     if ($result) {
         // Timestamp updated successfully
-        echo "Timestamp updated.";
+        echo "<script>console.log('Timestamp updated.')</script>";
     } else {
         // Error updating the timestamp
         echo "Error updating timestamp: " . mysqli_error($conn);
