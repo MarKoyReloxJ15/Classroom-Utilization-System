@@ -32,7 +32,7 @@ if(isset($_SESSION['username'])) {
     // Close the database connection
     mysqli_close($conn);
 } else {
-    // User is not logged in
-    echo "User is not logged in.";
+    // 
+    echo "<script>console.log('User is not logged in.')</script>";
 }
 ?>

@@ -22,6 +22,7 @@
         }
         th{
             text-align: center;
+            margin:0;
             background-color: rgb(192,192,192,.2);
         }
 
@@ -121,7 +122,7 @@ function statusFunc($faculty){
                                                 $displayText = "Faculty unavailable $timeDiffMinutes min";
                                             } else {
                                                 $hourdiff = floor($timeDiffMinutes / 60);
-                                                $displayText = "Faculty unavailable $hourdiff hour(s)";
+                                                $displayText = "Unavailable $hourdiff hour(s)";
                                             }
                                         }
 
@@ -141,7 +142,8 @@ function statusFunc($faculty){
                         } else {
                            // echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
 
-                            echo "No Schedule found.";
+                            // echo "No Schedule found.";
+                            echo "----";
                         }
                         
                         // Free the result set

@@ -9,7 +9,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+
+    .lgout{
+      position: absolute;
+      top: 2%;
+      right: 0;
+    }
   .green-bg {
   background-color: green;
   /* margin-left: 5%;
@@ -69,12 +76,16 @@
     <div class="col-sm-12 col-md-6 scholNameCont">
       <div class="scholName d-flex align-items-center">
         <img class="scholNLogo" src="rsuLogo.png" alt="Hello to the world">
-        <h1 class="ml-3 mb-0 font-size-responsive rsh1">Romblon State University-Cajidiocan Campus</h1>
+        <h1 class="ml-3 mb-0 font-size-responsive rsh1">Romblon State University-Cajidiocan Campus </h1> 
       </div>
     </div>
+   
   </div>
+
+ 
 </div>
 
+<a href="../index.php" title="Logout"><i class="fa fa-sign-out lgout" style="font-size:6vh;color:red"></i></a>
 
 
 
