@@ -1,5 +1,5 @@
 <?php
-include_once("header.php");
+//include_once("header.php");
 ?>
 
 <?php
@@ -35,6 +35,21 @@ include 'heartbeat.php';
                 font-size: 15px;
             }
 
+        }
+
+        @media screen and (max-width: 360px){
+            table td,table th {
+                font-size: 14px;
+                margin: 0;
+               
+            }
+            #tablecont td:nth-child(2), #tabecont th:nth-child(2){
+                font-size: 13px;
+            }
+            #tablecont{
+               padding: 0;
+                margin: 0;
+            }
         }
 
 
@@ -141,7 +156,8 @@ function statusFunc($faculty){
                         } else {
                             //echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
 
-                            echo "No Schedule found.";
+                            // echo "No Schedule found.";
+                            echo "----";
                         }
                         
                         // Free the result set
@@ -191,8 +207,8 @@ function createScheduleTable($day, $conn) {
     </div>";
     
 
-
-        echo "<div class='container'><table width='' class='table table-bordered theTable' border='1'>
+ 
+        echo "<div class='container' id='tablecont' ><table width='' class='table table-bordered theTable' border='1'>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
                 <th>Room</th>

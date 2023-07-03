@@ -54,7 +54,7 @@
 
 @media screen and (max-width: 400px) {
   .rsh1 {
-    font-size: 16px; /* Adjust the font size for screens up to 400px */
+    font-size: 15px; /* Adjust the font size for screens up to 400px */
   }
 }
 

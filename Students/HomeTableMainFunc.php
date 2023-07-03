@@ -1,4 +1,6 @@
-
+<?php
+//include_once("header.php");
+?>
 
 <?php
 //include 'heartbeat.php';
@@ -17,12 +19,11 @@
 
     <style>
 
-        td a {
+    td a {
         margin  : 10%; /* Adjust the value as needed */
         }
         th{
             text-align: center;
-            margin:0;
             background-color: rgb(192,192,192,.2);
         }
 
@@ -35,6 +36,22 @@
             }
 
         }
+
+        @media screen and (max-width: 360px){
+            table td,table th {
+                font-size: 14px;
+                margin: 0;
+               
+            }
+            #tablecont td:nth-child(2), #tabecont th:nth-child(2){
+                font-size: 13px;
+            }
+            #tablecont{
+               padding: 0;
+                margin: 0;
+            }
+        }
+
 
     </style>
 </head>
@@ -194,7 +211,7 @@ function createScheduleTable($day, $conn) {
     
 
 
-        echo "<div class='container'><table width='' class='table table-bordered' border='1'>
+        echo "<div class='container' id='tablecont'><table width='' class='table table-bordered' border='1'>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
                 <th>Room</th>
