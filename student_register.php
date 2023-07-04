@@ -162,6 +162,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $name = $_POST["name"];
     $block = $_POST["blocks"];
+    $password = $_POST["password"];
+
+    // Database connection parameters
+    $servername = "localhost";
+    $username = "root";
+    $dbpassword = "";
+    $dbname = "room_util_sys_db";
+
+        // Create a new PDO instance
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $dbpassword);
+
+        // Check if the name exists in the other table
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM exprimental_studentlist WHERE name = ?");
+        $stmt->execute([$name]);
+        $existingNameCount = $stmt->fetchColumn();
+    
+        // Check if the name already has a password in the student table
+        $stmt = $pdo->prepare("SELECT password FROM student WHERE student_name = ?");
+        $stmt->execute([$name]);
+        $existingPassword = $stmt->fetchColumn();
+    
+        if ($existingNameCount > 0 && !empty($existingPassword)) {
+            // Name exists in the other table and already has a password, disallow data insertion
+            echo "<script>alert('You are not allowed to insert data!');</script>";
+        } elseif ($existingNameCount > 0) {
+            // Name exists in the other table, but doesn't have a password yet
+    
+            // Hash the password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    
+            // Prepare and execute the INSERT statement
+            $stmt = $pdo->prepare("INSERT INTO student (student_name, blocks, password) VALUES (?, ?, ?)");
+            $stmt->execute([$name, $block, $hashedPassword]);
+    
+            // Check if the insertion was successful
+            if ($stmt->rowCount() > 0) {
+                echo "<script>window.location.href = 'studentLogin.php?success=1';</script>";
+            } else {
+                echo "<script>alert('Registration Failed!');</script>";
+            }
+        } else {
+            // Name doesn't exist in the other table
+            echo "<script>alert('Name not found in the other table!');</script>";
+        }
+    }
+    
+?>
+
+
+
+<!-- if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $name = $_POST["name"];
+    $block = $_POST["blocks"];
     // $yearLevel = $_POST["yearLevel"];
     $password = $_POST["password"];
 
@@ -189,5 +243,4 @@ echo "<script>window.location.href = 'studentLogin.php?success=1';</script>";
     } else {
         echo "<script>alert('Registration Failed!')</script>";
     }
-}
-?>
+} -->

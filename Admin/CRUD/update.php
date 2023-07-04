@@ -1,3 +1,6 @@
+
+
+
 <?php
 // Include config file
 require_once "config.php";
@@ -138,6 +141,18 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             width: 500px;
             margin: 0 auto;
         }
+        .deletePass{
+            background-color: #f2666c;
+            border: 1px solid black;
+            transition-duration: .5s;
+            color: white;
+
+        }
+        .deletePass:hover{
+            background-color:#f00000;
+            border-radius: 5px;
+            color: mistyrose;
+        }
     </style>
 </head>
 <body>
@@ -148,6 +163,15 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <div class="page-header">
                         <h2>Update Record</h2>
                     </div>
+
+                    <form method="POST" action="deletePass.php">
+                    <input type="hidden" name="id" value="1"> <!-- ID of the person you want to delete -->
+                    <input type="submit" name="delete_button" value="Delete Password" onclick="return confirm('Are you sure you want to delete?');" class="deletePass">
+                    
+                    </form>
+
+
+
                     <p>Please edit the input values and submit to update the record.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                         <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
@@ -203,6 +227,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                         </div> -->
                        
                        
+
+
+
+
+
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-default">Cancel</a>

@@ -3,7 +3,7 @@
 ?>
 
 <?php
-include 'heartbeat.php';
+ include_once('heartbeat.php');
 ?>
 
 

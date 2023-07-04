@@ -89,7 +89,7 @@
             </div>
             
             <input type="submit" value="Submit">
-            <a href="student_register.php">Register</a>
+            <a href="facultyRegister.php">Register</a>
         </form>
     </div>
 </body>
