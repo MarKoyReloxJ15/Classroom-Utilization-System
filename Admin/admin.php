@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="adminStyle.css">
-    <link rel="icon" href="images/rsuLogo.png" type="image/x-icon"/>
-
-    
+    <link rel="icon" href="images/rsuLogo.png" type="image/x-icon"/>   
 
     <title>Classroom Utilization Management System</title>
 </head>
@@ -56,7 +54,7 @@
                                 <li id="HomeLi"class="tablinks" onclick="openTab(event, 'Home')">Home</li>
                                 <li class="tablinks" onclick="openTab(event, 'Blocks')">Blocks</li>
                                 <li class="tablinks" onclick="openTab(event, 'Schedules')">Schedules</li>
-                                <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructors</li>
+                                <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructor</li>
                                 <li class="tablinks" onclick="openTab(event, 'List')">List</li>
                                 <li class="tablinks" ><a href="../../index.php" style="text-decoration: none;color:black">Logout</a></li>
                             </ul>

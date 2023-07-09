@@ -1,94 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> ayaw pag hilabti masisira buhay mo -->
+<style>
+   body {
+  margin: 0;
+  padding: 0;
+}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+.lgout {
+  position: absolute;
+  top: 3%;
+  right: 2%;
+  font-size: 4vw;
+}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-
-    .lgout{
-      position: absolute;
-      top: 2%;
-      right: 0;
-    }
-  .green-bg {
+.green-bg {
   background-color: green;
-  /* margin-left: 5%;
-  margin-right: 5%;
-  width: 90%; 
-  margin-top: 1.5%;
-   border-radius: 2vh;
-  margin-bottom: 2%; */
+  /* padding: 1% 0; */
 }
 
 .scholName {
-  height: 10vh; /* Set the height to 10% of the viewport height */
   display: flex;
-  justify-content: center;
   align-items: center;
+  padding: 1% 2%;
 }
 
 .scholNLogo {
-  height: 50px; /* Adjust the height as needed */
-  margin-right: 5px; /* Add some spacing between the image and text */
+  height: 9.5vh;
+  margin-right: 5px;
 }
 
-.rsh1 {
-  margin-bottom: 0; /* Remove any bottom margin */
-  font-size: 22px; /* Default font size */
+
+.titleSys {
+  background-color: beige;
+  text-align: center;
+}
+
+.titleSys h4 {
+  margin: 0;
+  /* font-size: 3.7vw; */
+  
+}
+
+
+.scholName h1 {
+  margin: 0;
+  font-size: 3.5vw;
   color: white;
-}
-
-/* Media queries for responsive font sizes */
-@media screen and (max-width: 576px) {
-  .rsh1 {
-    font-size: 17px; /* Adjust the font size for screens up to 576px */
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .rsh1 {
-    font-size: 15px; /* Adjust the font size for screens up to 400px */
-  }
-}
-
-@media screen and (max-width: 300px) {
- .rsh1 {
-    font-size: 12px; /* Adjust the font size for screens up to 300px */
-  }
+  height: 3vh;
+  padding-bottom: 5%;
 }
 
 
-    </style>
 
+
+
+
+</style>
 </head>
 <body>
-    
 
-<div class="container-fluid green-bg">
-  <div class="row justify-content-center">
-    <div class="col-sm-12 col-md-6 scholNameCont">
-      <div class="scholName d-flex align-items-center">
-        <img class="scholNLogo" src="rsuLogo.png" alt="Hello to the world">
-        <h1 class="ml-3 mb-0 font-size-responsive rsh1">Romblon State University-Cajidiocan Campus </h1> 
-      </div>
-    </div>
-   
+<div class="green-bg">
+  <div class="scholName">
+    <img class="scholNLogo" src="rsuLogo.png" alt="Hello to the world">
+    <h1>Romblon State University-Cajidiocan Campus</h1> 
   </div>
-
- 
 </div>
 
-<a href="../index.php" title="Logout"><i class="fa fa-sign-out lgout" style="font-size:6vh;color:red"></i></a>
+<div class="titleSys">
+  <h4>Classroom Utilization Management System</h4>
+</div>
 
-
-
+<a href="../index.php" title="Logout"><i class="fas fa-sign-out-alt lgout" style="color: red;"></i></a>
 
 </body>
 </html>

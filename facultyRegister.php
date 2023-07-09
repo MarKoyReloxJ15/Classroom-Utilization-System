@@ -1,21 +1,82 @@
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Retrieve form data
+  $name = $_POST["name"];
+  $password = $_POST["password"];
+
+  // Hash the password
+  $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+  // Perform any necessary processing with the form data
+  // ...
+
+  // Save the hashed password in the database
+  // Assuming you have a database connection established
+  $servername = "localhost";
+  $dbUsername = "root";
+  $dbPassword = "";
+  $dbName = "room_util_sys_db";
+
+  $pdo = new PDO("mysql:host=$servername;dbname=$dbName", $dbUsername, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // Check if the password already exists or is empty in the table
+  $checkQuery = "SELECT password FROM it_faculty WHERE Name = ?";
+  $stmt = $pdo->prepare($checkQuery);
+  $stmt->execute([$name]);
+  $existingPassword = $stmt->fetchColumn();
+
+  if ($existingPassword !== null && $existingPassword !== "") {
+      echo "Password already exists in the table. Please choose a different password.";
+      header("Location: facultyRegister.php");
+      exit; // Stop further execution
+  }
+
+  // Update the password in the database
+  $updateQuery = "UPDATE it_faculty SET password = ? WHERE Name = ? AND (password IS NULL OR password = '')";
+  $updateStmt = $pdo->prepare($updateQuery);
+  $updateStmt->execute([$hashedPassword, $name]);
+
+  if ($updateStmt->rowCount() > 0) {
+      echo "Password updated successfully!";
+      header("Location: facultyLogin.php");
+      exit;
+  } else {
+      echo "Error updating password.";
+  }
+}
+
+
+?>
+
+
+<?php
+include('rsuHeader.php');
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Faculty Registration Form</title>
+ 
   <style>
-    body {
+     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      padding: 20px;
-    }
+      /* background-color: #f5f5f5;
+         padding: 20px;  */
+         
+    } 
 
     h2 {
       text-align: center;
     }
 
     form {
+     position: relative;
       max-width: 300px;
       margin: 0 auto;
+      margin-top: 2%;
       background-color: #fff;
       padding: 20px;
       border-radius: 5px;
@@ -42,8 +103,10 @@
       width: 100%;
       padding: 10px;
       margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border: 2px solid black;
+      border-radius: 10px;
+      /* border: 1px solid #ccc; */
+      /* border-radius: 4px; */
       box-sizing: border-box;
     }
 
@@ -65,7 +128,7 @@
 
 
 <form action="facultyRegister.php" method="POST">
-<h2>Registration Form</h2>
+<h2>Faculty Registration Form</h2>
 
   <label for="name">Name:</label>
                 <select name="name" id="name" class="form-control">
@@ -100,53 +163,3 @@
 </body>
 </html>
 
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Retrieve form data
-  $name = $_POST["name"];
-  $password = $_POST["password"];
-
-  // Hash the password
-  $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-  // Perform any necessary processing with the form data
-  // ...
-
-  // Save the hashed password in the database
-  // Assuming you have a database connection established
-  $servername = "localhost";
-  $dbUsername = "root";
-  $dbPassword = "";
-  $dbName = "room_util_sys_db";
-
-  $pdo = new PDO("mysql:host=$servername;dbname=$dbName", $dbUsername, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  // Check if the password already exists or is empty in the table
-  $checkQuery = "SELECT password FROM it_faculty WHERE Name = ?";
-  $stmt = $pdo->prepare($checkQuery);
-  $stmt->execute([$name]);
-  $existingPassword = $stmt->fetchColumn();
-
-  if ($existingPassword !== null && $existingPassword !== "") {
-      echo "Password already exists in the table. Please choose a different password.";
-      exit; // Stop further execution
-  }
-
-  // Update the password in the database
-  $updateQuery = "UPDATE it_faculty SET password = ? WHERE Name = ? AND (password IS NULL OR password = '')";
-  $updateStmt = $pdo->prepare($updateQuery);
-  $updateStmt->execute([$hashedPassword, $name]);
-
-  if ($updateStmt->rowCount() > 0) {
-      echo "Password updated successfully!";
-      header("Location: facultyLogin.php");
-      exit;
-  } else {
-      echo "Error updating password.";
-  }
-}
-
-
-?>

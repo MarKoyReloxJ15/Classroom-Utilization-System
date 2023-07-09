@@ -22,6 +22,7 @@ include_once("header.php");
     background-color: transparent;
   } */
 
+ 
         td a {
         margin  : 10%; /* Adjust the value as needed */
         }
@@ -184,7 +185,7 @@ function createScheduleTable($day, $conn) {
     
 
 
-        echo "<div class='container'><table width='' class='table table-bordered' border='1'>
+        echo "<div class='container'><table width='' class='table table-bordered' border='1' style='background-color: rgba(242, 242, 242, 0.6);'>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
                 <th>Room</th>

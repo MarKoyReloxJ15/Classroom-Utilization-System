@@ -17,8 +17,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <style>
+    <link rel="icon" href="rsuLogo.png" type="image/x-icon"/>   
 
+    <title>Classroom Utilization Management System</title>
+
+    <style>
+body::before {
+    content: "";
+    background-image: url(rsuLogo.png);
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.08;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
         td a {
         margin  : 10%; /* Adjust the value as needed */
         }
@@ -208,7 +225,7 @@ function createScheduleTable($day, $conn) {
     
 
  
-        echo "<div class='container' id='tablecont' ><table width='' class='table table-bordered theTable' border='1'>
+        echo "<div class='container' id='tablecont' ><table width='' class='table table-bordered theTable' border='1' style='background-color: rgba(242, 242, 242, 0.6);'>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
                 <th>Room</th>

@@ -1,39 +1,95 @@
+
+<?php
+include('rsuHeader.php');
+?>
+
+
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Student Registration Form</title>
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        /* .scholNLogo {
+            position: relative;
+            width: 8%;
+            height: 70%;
+            margin-right: 10px;
         }
+
+        .scholName {
+
+            position: relative;
+            height: 100%;
+            background-color: #00AF50;
+            border-radius: 1px;
+            border: 1px solid #41719C;
+
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 2vh;
+        } */
+
+        /* body {
+            position: relative;
+        } */
+
+        /* body::before {
+            content: "";
+            background-image: url(rsuLogo.png);
+            width: 90%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            opacity: 0.1;
+            position: absolute;
+            top: 25%;
+            left: 4.5%;
+            right: 0;
+            bottom: 0;
+
+        } */
 
         h2 {
             text-align: center;
             color: #333;
         }
 
+        .container{
+           
+        }
         form {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* background-color: rgba(255, 255, 255, 0.1); */
+          
             width: 300px;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 2%;
+            
+            /* width: 80%; */
+            background-color: rgb(250,248,245,0.4);
         }
+
         select {
-            width: 100%;
+            width: 90%;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            box-sizing:content-box;
+            border: 2px solid black;
+      border-radius: 10px;
+            /* border: 1px solid #ccc;
+            border-radius: 4px; */
+           
         }
+
         select option {
             padding: 5px;
+           
         }
 
         label {
@@ -53,10 +109,12 @@
 
         input[type="text"],
         input[type="password"] {
-            width: 100%;
+            width: 90%;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 2px solid black;
+      border-radius: 10px;
+            /* border: 1px solid #ccc;
+            border-radius: 4px; */
         }
 
         input[type="submit"] {
@@ -74,37 +132,45 @@
         }
     </style>
 </head>
+
 <body>
-   
+    <!-- <div class="scholNameCont">
+        <div class="scholName">
+            <img class="scholNLogo" src="rsuLogo.png">
+            <h1>Romblon State University-Cajidiocan Campus</h1>
+        </div> -->
+
+    </div>
+
     <form method="POST" action="student_register.php">
-    <h2>Registration</h2>
+        <h2>Student Registration Form </h2>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
 
 
         <label for="blocks">Block:</label>
-                <select name="blocks" id="blocks" class="form-control">
-                <option value="Irregular">Irregular</option>
-                    <?php
-                    $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
-                    if (!$connection) {
-                        die('Connection failed: ' . mysqli_connect_error());
-                    }
-                    
-                    $query = "SELECT name FROM blocks_detail ORDER BY name";
-                    $result = mysqli_query($connection, $query);
-                    if (!$result) {
-                        die('Query failed: ' . mysqli_error($connection));
-                    }
-                    
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
-                    }
-                    
-                    mysqli_close($connection);
-                    ?>
-                   
-                </select>
+        <select name="blocks" id="name" class="form-control">
+
+            <?php
+            $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
+            if (!$connection) {
+                die('Connection failed: ' . mysqli_connect_error());
+            }
+
+            $query = "SELECT Name FROM blocks_detail ORDER BY Name";
+            $result = mysqli_query($connection, $query);
+            if (!$result) {
+                die('Query failed: ' . mysqli_error($connection));
+            }
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<option value="' . $row['Name'] . '">' . $row['Name'] . '</option>';
+            }
+
+            mysqli_close($connection);
+            ?>
+            <option value="Irregular">Irregular</option>
+        </select>
 
         <!-- <label for="block">Block:</label>
             <select id="block" name="block" required>       
@@ -148,10 +214,11 @@
 
         <input type="submit" value="Register">
         <a href="studentLogin.php">
-          <button type="button">Back</button>
+            <button type="button">Back</button>
         </a>
     </form>
 </body>
+
 </html>
 
 

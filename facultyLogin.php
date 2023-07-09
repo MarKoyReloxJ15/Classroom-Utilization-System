@@ -1,101 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        
-        .password-input {
-            width: 95%;
-        }
-        
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <form action="facultyLogin.php" method="POST">
-            <div class="form-group">
-                <label for="advisor">Advisor</label>
-                <select name="advisor" id="advisor" class="form-control">
-                    <?php
-                    $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
-                    if (!$connection) {
-                        die('Connection failed: ' . mysqli_connect_error());
-                    }
-                    
-                    $query = "SELECT Name FROM it_faculty ORDER BY Name";
-                    $result = mysqli_query($connection, $query);
-                    if (!$result) {
-                        die('Query failed: ' . mysqli_error($connection));
-                    }
-                    
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<option value="' . $row['Name'] . '">' . $row['Name'] . '</option>';
-                    }
-                    
-                    mysqli_close($connection);
-                    ?>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control password-input">
-            </div>
-            
-            <input type="submit" value="Submit">
-            <a href="facultyRegister.php">Register</a>
-        </form>
-    </div>
-</body>
-</html>
-
-
 <?php
 session_start();
 
@@ -135,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: Faculty/HomeTableMainFunc.php');
                 exit();
             } else {
-                echo "Invalid username or password!";
+                echo "<script>alert('Invalid username or password!')</script>";  
             }
         } else {
-            echo "Invalid username or password!";
+            echo "<script>alert('Invalid username or password!')</script>";
         }
     } else {
         echo "Error: " . mysqli_error($conn);
@@ -148,3 +50,205 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_close($conn);
 }
 ?>
+
+<?php
+include('rsuHeader.php');
+?>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   
+    <style>
+        /* .scholNLogo {
+            position: relative;
+            width:8%;
+            height: 70%;
+            margin-right: 10px;
+        }
+
+        .scholName {
+
+            position: relative;
+            height: 100%;
+            background-color: #00AF50;
+            border-radius: 1px;
+            border: 1px solid #41719C;
+
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 2vh;
+        } */
+
+        /* body {
+            position: relative;
+        } */
+
+        body::before {
+    content: "";
+    background-image: url(rsuLogo.png);
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+       
+        .container {
+            position: relative;
+            max-width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: rgb(250,248,245);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            top: 60px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 90%;
+            padding: 10px;
+            border: 2px solid black;
+      border-radius: 10px;
+            /* border: 1px solid #ccc;
+            border-radius: 4px; */
+            box-sizing:content-box;
+        }
+
+        .password-input {
+            width: 84%;
+            box-sizing:content-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+
+        .password-container {
+    position: relative;
+  }
+
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+  }
+
+  .password-toggle:hover {
+    color: #333;
+  }
+
+  .password-input {
+    padding-right: 30px; /* Create space for the eye icon */
+  }
+
+ 
+    </style>
+</head>
+
+<body>
+    <!-- <div class="scholNameCont">
+        <div class="scholName">
+            <img class="scholNLogo" src="rsuLogo.png">
+            <h1>Romblon State University-Cajidiocan Campus</h1>
+        </div>
+    </div> -->
+        <div class="container">
+            <form action="facultyLogin.php" method="POST">
+                <h2>Faculty Login</h2>
+                <div class="form-group">
+                    <label for="advisor">Advisor</label>
+                    <select name="advisor" id="advisor" class="form-control">
+                        <?php
+                        $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
+                        if (!$connection) {
+                            die('Connection failed: ' . mysqli_connect_error());
+                        }
+
+                        $query = "SELECT Name FROM it_faculty ORDER BY Name";
+                        $result = mysqli_query($connection, $query);
+                        if (!$result) {
+                            die('Query failed: ' . mysqli_error($connection));
+                        }
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="' . $row['Name'] . '">' . $row['Name'] . '</option>';
+                        }
+
+                        mysqli_close($connection);
+                        ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" name="password" id="password" class="form-control password-input">
+                    <i class="password-toggle far fa-eye" onclick="togglePasswordVisibility()"></i>
+                </div>
+                </div>
+
+                <input type="submit" value="Submit">
+                <a href="facultyRegister.php">Register</a>
+            </form>
+        </div>
+
+
+        <script>
+  function togglePasswordVisibility() {
+    const passwordField = document.getElementById('password');
+    const passwordToggle = document.querySelector('.password-toggle');
+
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      passwordToggle.classList.remove('fa-eye');
+      passwordToggle.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      passwordToggle.classList.remove('fa-eye-slash');
+      passwordToggle.classList.add('fa-eye');
+    }
+  }
+</script>
+</body>
+
+</html>
+
+
