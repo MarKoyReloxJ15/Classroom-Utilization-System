@@ -12,7 +12,7 @@ $databaseName = "room_util_sys_db";
 $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 
 // mysql select query
-$query = "SELECT * FROM `blocks_detail`";
+$query = "SELECT * FROM `blocks_detail` ORDER BY name,year_level";
 
 // // for method 1
 
@@ -75,6 +75,7 @@ body {
 			<label class="col-md-4 control-label" for="faculty">Faculty</label> 
 			<div class="col-md-5">
 		<select id="faculty" name="faculty" class="form-control">
+        <option value="None">None</option>
             <?php echo $options;?>
         </select>
 		</div>
@@ -87,6 +88,7 @@ body {
 		<select  id="blocks" name="blocks"  class="form-control">
 
             <?php while($row1 = mysqli_fetch_array($result1)):;?>
+           
 
             <option  value="<?php echo $row1[1];?>"><?php echo $row1[1];?></option>
 

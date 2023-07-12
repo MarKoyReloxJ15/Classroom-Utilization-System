@@ -32,7 +32,7 @@
     
     $data = getPosts();
 
-    $existing_Query = $query = "SELECT * FROM `table_sched` WHERE ( `faculty`='$data[0]' AND `room`='$data[3]') AND (`Monday`='$data[4]' OR `Tuesday`='$data[5]' OR `Wednesday`='$data[6]' OR `Thursday`='$data[7]'OR`Friday`='$data[8]' OR`Saturday`='$data[9]' OR `Sunday`='$data[10]')
+    $existing_Query = $query = "SELECT * FROM `table_sched` WHERE ( /*`faculty`='$data[0]'AND*/ 'blocks'='$data[1]' AND `room`='$data[3]') AND (`Monday`='$data[4]' OR `Tuesday`='$data[5]' OR `Wednesday`='$data[6]' OR `Thursday`='$data[7]'OR`Friday`='$data[8]' OR`Saturday`='$data[9]' OR `Sunday`='$data[10]')
     AND ((`start_time` <= '$data[12]' AND `end_time` >= '$data[11]')
         OR (`start_time` <= '$data[11]' AND `end_time` >= '$data[11]')
         OR (`start_time` >= '$data[11]' AND `end_time` <= '$data[12]'))";

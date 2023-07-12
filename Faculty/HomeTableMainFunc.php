@@ -36,32 +36,37 @@ body::before {
     left: 0;
     z-index: -1;
 }
-        td a {
+td a {
         margin  : 10%; /* Adjust the value as needed */
         }
         th{
             text-align: center;
             background-color: rgb(192,192,192,.2);
         }
+       
+        table th td{
+                font-size: 2vw;
+                /* font-size: 15px; */
+            }
 
         @media (max-width: 800px) {
             .hide-column {
                 display: none;
             }
-            table td{
-                font-size: 15px;
-            }
+           
 
         }
 
         @media screen and (max-width: 360px){
             table td,table th {
-                font-size: 14px;
+                /* font-size: 1vw; */
+                /* font-size: 14px; */
                 margin: 0;
                
             }
             #tablecont td:nth-child(2), #tabecont th:nth-child(2){
-                font-size: 13px;
+                /* font-size: 1vw; */
+                /* font-size: 13px; */
             }
             #tablecont{
                padding: 0;
@@ -101,7 +106,7 @@ if ($conn->connect_error) {
     die("Couldn't connect to the database: " . $conn->connect_error);
 }
 
-function statusFunc($faculty){
+function statusFunc($faculty,$startTime,$endTime){
             $host = "localhost";
         $username = "root";
         $password = "";
@@ -150,17 +155,35 @@ function statusFunc($faculty){
                                             $displayText = "Vacant $dateDiffDays day(s)";
                                         } else {
                                             if ($timeDiffMinutes <= 60) {
-                                                $displayText = "Faculty unavailable $timeDiffMinutes min";
+                                                $displayText = "Unavailable $timeDiffMinutes min";
                                             } else {
                                                 $hourdiff = floor($timeDiffMinutes / 60);
-                                                $displayText = "Faculty unavailable $hourdiff hour(s)";
+                                                $displayText = "Faculty Unavailable $hourdiff hour(s)";
                                             }
                                         }
 
                                         echo "<button style='background-color: $backgroundColor;margin:0;display:inline;'>$displayText</button>";
                                     } else {
-                                        $backgroundColor = 'green';
-                                        echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:2%;color:white'>Active</div>";
+
+                                        //  $current_time = "09:00:00";
+                                $current_time = $currentDateTime->format('H:i:s');
+                                //echo $startTime."<br>".$endTime."<br>".$current_time."<br>";
+
+                               $date1 = DateTime::createFromFormat('H:i:s', $current_time);
+                               $date2 = DateTime::createFromFormat('H:i:s', $startTime);
+                               $date3 = DateTime::createFromFormat('H:i:s', $endTime);
+                               
+                               if ($date1 > $date2 && $date1 < $date3) {
+                                 // echo 'hooray';
+                                  $backgroundColor = 'green';                              
+                                  echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:2%;color:white'>Active</div>";
+                               } else {
+                                 // echo 'The current time is not within the specified range.';
+                                  echo "<div style='background-color:blue;margin:0;width:50%;display:inline;padding:2%;color:white'>Staffed</div>";
+                               }
+
+                                        // $backgroundColor = 'green';
+                                        // echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:2%;color:white'>Active</div>";
                                     }
 
 
@@ -273,7 +296,7 @@ function createScheduleTable($day, $conn) {
             
             echo "<td class=\"statusRow\" style=\"text-align: center;\">";
 
-           statusFunc($row['faculty'],$row['room']);
+            statusFunc($row['faculty'],$row['Start_Time'],$row['End_Time']);
             echo "</td>";
 
             

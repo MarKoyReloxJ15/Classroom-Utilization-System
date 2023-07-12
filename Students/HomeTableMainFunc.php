@@ -31,26 +31,29 @@
             background-color: rgb(192,192,192,.2);
         }
        
-
+        table th td{
+                font-size: 2vw;
+                /* font-size: 15px; */
+            }
 
         @media (max-width: 800px) {
             .hide-column {
                 display: none;
             }
-            table td{
-                font-size: 15px;
-            }
+           
 
         }
 
         @media screen and (max-width: 360px){
             table td,table th {
-                font-size: 14px;
+                /* font-size: 1vw; */
+                /* font-size: 14px; */
                 margin: 0;
                
             }
             #tablecont td:nth-child(2), #tabecont th:nth-child(2){
-                font-size: 13px;
+                /* font-size: 1vw; */
+                /* font-size: 13px; */
             }
             #tablecont{
                padding: 0;
@@ -106,92 +109,102 @@ if ($conn->connect_error) {
     die("Couldn't connect to the database: " . $conn->connect_error);
 }
 
-function statusFunc($faculty){
-            $host = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "room_util_sys_db";
+function statusFunc($faculty,$startTime,$endTime){
+    $host = "localhost";
+$username = "root";
+$password = "";
+$database = "room_util_sys_db";
 
-                // select database
-                $conn = new mysqli($host, $username, $password, $database);
-                if ($conn->connect_error) {
-                    die("Couldn't connect to the database: " . $conn->connect_error);
-                }
-                    $query = "SELECT * FROM it_faculty WHERE Name = '$faculty'";
-                    
-                    // Assuming you have a database connection, execute the query
-                    $result = mysqli_query($conn, $query); // Replace $connection with your database connection variable
-                    
-                    // Check if the query was successful
-                    if ($result) {
-                        // Process the results
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $timestamp = $row['timestamp'];
+        // select database
+        $conn = new mysqli($host, $username, $password, $database);
+        if ($conn->connect_error) {
+            die("Couldn't connect to the database: " . $conn->connect_error);
+        }
+            $query = "SELECT * FROM it_faculty WHERE Name = '$faculty'";
+            
+            // Assuming you have a database connection, execute the query
+            $result = mysqli_query($conn, $query); // Replace $connection with your database connection variable
+            
+            // Check if the query was successful
+            if ($result) {
+                // Process the results
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $timestamp = $row['timestamp'];
 
-                                    // Set the timezone to Asia/Manila
-                                    $timezone = new DateTimeZone('Asia/Manila');
-                                    date_default_timezone_set($timezone->getName());
-                                    
-                                    $currentDateTime = new DateTime('now', $timezone);//   $currentDateTime = new DateTime(null, $timezone); //this is the alternative if there is a bug in the afternoon time
-                                    
-                                   // echo $currentDateTime->format('Y-m-d H:i:s');
-                                    
+                            // Set the timezone to Asia/Manila
+                            $timezone = new DateTimeZone('Asia/Manila');
+                            date_default_timezone_set($timezone->getName());
+                            
+                            $currentDateTime = new DateTime('now', $timezone);//   $currentDateTime = new DateTime(null, $timezone); //this is the alternative if there is a bug in the afternoon time
+                            
+                           // echo $currentDateTime->format('Y-m-d H:i:s');
+                            
 
-                                    // Create a DateTime object for the timestamp with the desired timezone
-                                    $dateTime = new DateTime($timestamp, $timezone);
+                            // Create a DateTime object for the timestamp with the desired timezone
+                            $dateTime = new DateTime($timestamp, $timezone);
 
-                                    // Calculate the time difference in minutes
-                                    $timeDiffMinutes = round(($currentDateTime->getTimestamp() - $dateTime->getTimestamp()) / 60);
+                            // Calculate the time difference in minutes
+                            $timeDiffMinutes = round(($currentDateTime->getTimestamp() - $dateTime->getTimestamp()) / 60);
 
-                                    // Calculate the date difference in days
-                                    $dateDiffDays = $currentDateTime->diff($dateTime)->days;
+                            // Calculate the date difference in days
+                            $dateDiffDays = $currentDateTime->diff($dateTime)->days;
 
-                                    // Set the background color based on the time and date difference
-                                    if ($dateDiffDays > 0 || $timeDiffMinutes > 30) {
-                                        $backgroundColor = 'red';
+                            // Set the background color based on the time and date difference
+                            if ($dateDiffDays > 0 || $timeDiffMinutes > 30) {
+                                $backgroundColor = 'red';
 
-                                        if ($dateDiffDays > 0) {
-                                            $displayText = "Vacant $dateDiffDays day(s)";
-                                        } else {
-                                            if ($timeDiffMinutes <= 60) {
-                                                $displayText = "Faculty unavailable $timeDiffMinutes min";
-                                            } else {
-                                                $hourdiff = floor($timeDiffMinutes / 60);
-                                                $displayText = "Unavailable $hourdiff hour(s)";
-                                            }
-                                        }
-
-                                        echo "<button style='background-color: $backgroundColor;margin:0;display:inline;'>$displayText</button>";
+                                if ($dateDiffDays > 0) {
+                                    $displayText = "Vacant $dateDiffDays day(s)";
+                                } else {
+                                    if ($timeDiffMinutes <= 60) {
+                                        $displayText = "Unavailable $timeDiffMinutes min";
                                     } else {
-                                        $backgroundColor = 'green';
-                                        echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:2%;color:white'>Active</div>";
+                                        $hourdiff = floor($timeDiffMinutes / 60);
+                                        $displayText = "Unavailable $hourdiff hour(s)";
+                                    }
+                                }
+
+                                echo "<button style='background-color: $backgroundColor;margin:0;display:inline;'>$displayText</button>";
+                            } else {
+
+
+                               //  $current_time = "09:00:00";
+                                $current_time = $currentDateTime->format('H:i:s');
+                                 //echo $startTime."<br>".$endTime."<br>".$current_time."<br>";
+
+                                $date1 = DateTime::createFromFormat('H:i:s', $current_time);
+                                $date2 = DateTime::createFromFormat('H:i:s', $startTime);
+                                $date3 = DateTime::createFromFormat('H:i:s', $endTime);
+                                
+                                if ($date1 > $date2 && $date1 < $date3) {
+                                  // echo 'hooray';
+                                   $backgroundColor = 'green';                              
+                                   echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:2%;color:white'>Active</div>";
+                                } else {
+                                  // echo 'The current time is not within the specified range.';
+                                   echo "<div style='background-color:blue;margin:0;width:50%;display:inline;padding:2%;color:white'>Staffed</div>";
+                                }
                                     }
 
-
-                                // Echo the background color
-
-                                // Output the <td> element with the background color
-                                // echo "<a href='update.php?id=". $row['id'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a> ";
-                                // echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:1%;'>Active $timeDiffMinutes min ago</div>";
-                            }
-                        } else {
-                           // echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-
-                            // echo "No Schedule found.";
-                            echo "----";
-                        }
-                        
-                        // Free the result set
-                        mysqli_free_result($result);
-                    } else {
-                        echo "Query failed: " . mysqli_error($conn); // Replace $connection with your database connection variable
+                             
                     }
-                    
-                    // Close the database connection
-                    mysqli_close($conn); // Replace $connection with your database connection variable
-     }
+                } else {
+                   // echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
 
+                    // echo "No Schedule found.";
+                    echo "----";
+                }
+                
+                // Free the result set
+                mysqli_free_result($result);
+            } else {
+                echo "Query failed: " . mysqli_error($conn); // Replace $connection with your database connection variable
+            }
+            
+            // Close the database connection
+            mysqli_close($conn); // Replace $connection with your database connection variable
+}
 
 
 //function for the table
@@ -278,7 +291,7 @@ function createScheduleTable($day, $conn) {
             
             echo "<td class=\"statusRow\" style=\"text-align: center;\">";
 
-           statusFunc($row['faculty'],$row['room']);
+           statusFunc($row['faculty'],$row['Start_Time'],$row['End_Time']);
             echo "</td>";
 
             

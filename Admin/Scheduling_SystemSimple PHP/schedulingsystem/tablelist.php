@@ -10,6 +10,15 @@ include_once("header.php");
         table td {
             text-align: center;
         }
+         td{
+            position: relative;
+         }
+
+        .editFacName{
+            position:absolute;
+            top: 0;
+            right: 0;
+        }
     </style>
 
     <script type="text/javascript">
@@ -74,22 +83,22 @@ include_once("header.php");
             filterRowsByTime("PM");
         });
 
-        function filterRowsByTime(time) {
-            var rows = document.querySelectorAll("tbody tr");
-            rows.forEach(function(row) {
-                var startTime = row.querySelector("td:nth-child(12)").textContent.trim();
-                var isAM = startTime.endsWith("AM");
-                var isPM = startTime.endsWith("PM");
+        // function filterRowsByTime(time) {
+        //     var rows = document.querySelectorAll("tbody tr");
+        //     rows.forEach(function(row) {
+        //         var startTime = row.querySelector("td:nth-child(12)").textContent.trim();
+        //         var isAM = startTime.endsWith("AM");
+        //         var isPM = startTime.endsWith("PM");
 
-                if ((time === "AM" && isAM) || (time === "PM" && isPM)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        }
+        //         if ((time === "AM" && isAM) || (time === "PM" && isPM)) {
+        //             row.style.display = "";
+        //         } else {
+        //             row.style.display = "none";
+        //         }
+        //     });
+        // }
 
-        sortRowsByStartTime();
+        // sortRowsByStartTime();
     });
 </script>
 
@@ -156,7 +165,8 @@ include_once("header.php");
                     die("Couldn't connect to the database: " . $conn->connect_error);
                 }
 
-                $query = "SELECT * FROM table_sched ";
+                // $query = "SELECT * FROM table_sched ";
+                $query = "SELECT * FROM table_sched ORDER BY blocks ASC, Start_Time";
                 $stmt = $conn->prepare($query);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -164,7 +174,7 @@ include_once("header.php");
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row['room'] . "</td>";
-                    echo "<td>" . $row['faculty'] . "</td>";
+                    echo "<td>" . $row['faculty'] ."<a href='updateFacName.php?id=". $row['id'] ."' title='Update Faculty Name Record' data-toggle='tooltip' class='editFacName'><span class='glyphicon glyphicon-pencil'></span></a>"."</td>";
                     echo "<td>" . $row['blocks'] . "</td>";
                     echo "<td>" . $row['subject'] . "</td>";
                     // echo "<td>" . $row['weekdays'] . "</td>";
