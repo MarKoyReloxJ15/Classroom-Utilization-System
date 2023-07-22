@@ -1,16 +1,16 @@
 
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+session_start(); // Start the PHP session
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST["name"];
     $password = $_POST["password"];
 
-
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     // Database connection settings
     $servername = "localhost";  // Replace with your MySQL server name
     $username = "root";        // Replace with your MySQL username
-    $password_db = ""; // Replace with your MySQL password
+    $password_db = "";         // Replace with your MySQL password
     $dbname = "room_util_sys_db"; // Replace with your MySQL database name
 
     // Create connection
@@ -21,23 +21,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // Check the number of existing admin accounts
+    $countQuery = "SELECT COUNT(*) as num_rows FROM admin_register";
+    $countResult = $conn->query($countQuery);
+    if ($countResult) {
+        $row = $countResult->fetch_assoc();
+        $numRows = $row['num_rows'];
+        if ($numRows >= 5) {
+            $_SESSION['message'] = "Cannot register. Maximum admin accounts reached.";
+            header("Location: adminRegister.php");
+            exit;
+        }
+    } else {
+        $_SESSION['message'] = "Error: " . $conn->error;
+        header("Location: adminRegister.php");
+        exit;
+    }
+
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
     // Prepare and bind the insert statement
     $stmt = $conn->prepare("INSERT INTO admin_register (name, password) VALUES (?, ?)");
-    $stmt->bind_param("ss", $name,  $hashedPassword);
+    $stmt->bind_param("ss", $name, $hashedPassword);
 
     // Execute the insert statement
-    if ($stmt->execute() === TRUE) {
-        echo "Registration successful. Data inserted into the database.";
+    if ($stmt->execute()) {
+        $_SESSION['message'] = "Registration successful. Data inserted into the database.";
         header("Location: adminLogin.php");
     } else {
-        echo "Error: " . $stmt->error;
+        $_SESSION['message'] = "Error: " . $stmt->error;
+        header("Location: adminRegister.php");
     }
-    
+
     // Close the prepared statement and database connection
     $stmt->close();
     $conn->close();
 }
 ?>
+
+
+
 
 
 

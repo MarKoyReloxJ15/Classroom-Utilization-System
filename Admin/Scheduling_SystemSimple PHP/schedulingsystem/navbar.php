@@ -5,7 +5,7 @@
 .contNav {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
 }
 
 .navbar-horizontal {
@@ -69,6 +69,7 @@
             <li><a href="addroom.php"><span class="glyphicon glyphicon-asterisk"></span> Room</a></li>
             <!-- <li><a href="addtime.php"><span class="glyphicon glyphicon-time"></span> Time</a></li> -->
             <li><a href="list.php"><span class="glyphicon glyphicon-list"></span> List</a></li>
+            <li><a href="studentList.php"><span class="glyphicon glyphicon-list"></span>Student List</a></li>
            
             <!-- <li><a href="Index.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li> -->
         </ul>

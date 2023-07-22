@@ -158,6 +158,7 @@ while($row2 = mysqli_fetch_array($result2))
 			<label class="col-md-4 control-label" for="subject">Subject</label> 
 			<div class="col-md-5">
 		<select  id="subject" name="subject"  class="form-control">
+            <option value="None">None</option>
             <?php echo $options;?>
         </select>
 		</div>

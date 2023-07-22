@@ -53,10 +53,11 @@ td {
         $result = $stmt->get_result();
     
         echo "<div class='container'><table width='' class='table table-bordered' border='1'>
-                <tr><th colspan=\"4\" style=\"background-color: #008000; color: white;\">$day</th></tr>
+                <tr><th colspan=\"5\" style=\"background-color: #008000; color: white;\">$day</th></tr>
                 <tr>
                     <th style=\"background-color: Yellow;\">Room</th>
                     <th style=\"background-color: lightblue;\">Blocks</th>
+                    <th style=\"background-color: lightblue;\">Faculty</th>
                     <th style=\"background-color: #7BCCB5;\">Start time</th>
                     <th style=\"background-color: #FFB4B4;\">End time</th>
                 </tr>";
@@ -68,6 +69,7 @@ td {
             // echo "<td>" . $row[$day] . "</td>";
             echo "<td style=\"background-color: #F1F1F1;\">" . $row['room'] . "</td>";
             echo "<td style=\"background-color: #F1F1F1;\">" . $row['blocks'] . "</td>";
+            echo "<td style=\"background-color: #F1F1F1;\">" . $row['faculty'] . "</td>";
             echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['Start_Time'])) . "</td>";
             echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['End_Time'])) . "</td>";
             echo "</tr>";

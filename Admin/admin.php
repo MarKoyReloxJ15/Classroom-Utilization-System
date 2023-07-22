@@ -31,7 +31,7 @@
                                 <li class="tablinks" onclick="openTab(event, 'Schedules')">Schedules</li>
                                 <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructors</li>
                                 <li class="tablinks" onclick="openTab(event, 'List')">List</li>
-                                <li class="tablinks" ><a href="../../index.php" style="text-decoration: none;">Logout</a></li>
+                                <li class="tablinks" onclick="logoutConfirmation()"><a href="#" style="text-decoration: none;">Logout</a></li>
                             </ul>
                     </div>
             </div>
@@ -56,7 +56,7 @@
                                 <li class="tablinks" onclick="openTab(event, 'Schedules')">Schedules</li>
                                 <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructor</li>
                                 <li class="tablinks" onclick="openTab(event, 'List')">List</li>
-                                <li class="tablinks" ><a href="../../index.php" style="text-decoration: none;color:black">Logout</a></li>
+                                <li class="tablinks" onclick="logoutConfirmation()"><a href="#" style="text-decoration: none;color:black">Logout</a></li>
                             </ul>
                     </div>
 

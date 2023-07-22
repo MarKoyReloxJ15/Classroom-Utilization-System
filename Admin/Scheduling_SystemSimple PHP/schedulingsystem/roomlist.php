@@ -76,7 +76,7 @@ td {
         if ($stmt->execute()) {
             echo '<script type="text/javascript">
                     alert("Row Successfully Deleted");
-                    location="tablelist.php";
+                    location="roomlist.php";
                   </script>';
             exit;
         } else {

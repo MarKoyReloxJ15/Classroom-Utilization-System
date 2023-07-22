@@ -39,7 +39,7 @@ include_once("header.php");
         }
        
         table th td{
-                font-size: 2vw;
+                font-size: 1px;
                 /* font-size: 15px; */
             }
 
@@ -186,9 +186,9 @@ function statusFunc($faculty,$startTime,$endTime){
                                 // echo "<div style='background-color: $backgroundColor;margin:0;width:50%;display:inline;padding:1%;'>Active $timeDiffMinutes min ago</div>";
                             }
                         } else {
-                            echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                            // echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
 
-                            echo "No results found.";
+                            echo "No Faculty found.";
                         }
                         
                         // Free the result set
@@ -222,7 +222,7 @@ function createScheduleTable($day, $conn) {
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
-        echo "<div class='container' style='margin-bottom:1%;'>
+        echo "<div class='container-fluid' style='margin-bottom:1%;'>
         <div class='row'>
             <div class='col-md-6'></div>
             <div class='col-md-6 text-right'>
@@ -239,7 +239,7 @@ function createScheduleTable($day, $conn) {
     
 
 
-        echo "<div class='container'><table width='' class='table table-bordered' border='1' style='background-color: rgba(242, 242, 242, 0.6);'>
+        echo "<div class='container-fluid'><table width='' class='table table-bordered' border='1' style='background-color: rgba(242, 242, 242, 0.6);font-size:1.6vw;'>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
                 <th>Room</th>

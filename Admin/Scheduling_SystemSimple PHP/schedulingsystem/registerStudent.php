@@ -3,6 +3,7 @@ include_once("header.php");
 include_once("navbar.php");
 ?>
 
+
 <html>
 <head>
 <style>
@@ -25,7 +26,8 @@ td {
 </style>
 </head>
 
-<body><br>
+
+
 <div class="container">
     <body>
     <?php
@@ -35,7 +37,7 @@ td {
     $host = "localhost";
     $username = "root";
     $password = "";
-    $database = "insertion";
+    $database = "room_util_sys_db";
 
     // select database
     $conn = new mysqli($host, $username, $password, $database);
@@ -43,25 +45,26 @@ td {
         die("Couldn't connect to the database: " . $conn->connect_error);
     }
 
-    $query = "SELECT * FROM course";
+    $query = "SELECT * FROM student ORDER BY blocks";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();
 
     echo "<div class='container'><table width='' class='table table-bordered' border='1' >
+             <caption><h2>List of Registered student</h2></caption>
             <tr>
-                <th>Code</th>
-                <th>Course</th>
+                <th>Student</th>
+                <th>Block</th>
                 <th>Action</th>
             </tr>";
-
+         
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row['course_code'] . "</td>";
-        echo "<td>" . $row['course_name'] . "</td>";
+        echo "<td>" . $row['student_name'] . "</td>";
+        echo "<td>" . $row['blocks'] . "</td>";
         echo "<td>
-                <form class='form-horizontal' method='post' action='corlist.php'>
-                    <input name='course_id' type='hidden' value='" . $row['course_id'] . "'>
+                <form class='form-horizontal' method='post' action='registerStudent.php'>
+                    <input name='id' type='hidden' value='" . $row['id'] . "'>
                     <input type='submit' class='btn btn-danger' name='delete' value='Delete'>
                 </form>
             </td>";
@@ -70,15 +73,15 @@ td {
     echo "</table></div>";
 
     // delete record
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course_id'])) {
-        $course_id = $_POST['course_id'];
-        $deleteQuery = "DELETE FROM course WHERE course_id = ?";
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+        $id = $_POST['id'];
+        $deleteQuery = "DELETE FROM student WHERE id = ?";
         $stmt = $conn->prepare($deleteQuery);
-        $stmt->bind_param("i", $course_id);
+        $stmt->bind_param("i", $id);
         if ($stmt->execute()) {
             echo '<script type="text/javascript">
                     alert("Row Successfully Deleted");
-                    location="list.php";
+                    location="studentList.php";
                   </script>';
             exit;
         } else {
@@ -92,9 +95,12 @@ td {
 </div>
 </div>
 </div>
-</body>
-</html>
 
+
+
+
+</body>
+</html> 
 <?php
 include_once("footer.php");
 ?>

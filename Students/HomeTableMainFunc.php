@@ -193,7 +193,8 @@ $database = "room_util_sys_db";
                    // echo "<a href='home.php? title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
 
                     // echo "No Schedule found.";
-                    echo "----";
+                    // echo "Nonfaculty";
+                    echo "Unfaculty";
                 }
                 
                 // Free the result set

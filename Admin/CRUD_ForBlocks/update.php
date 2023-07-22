@@ -171,7 +171,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                         <div class="form-group <?php echo (!empty($yearLvl_err)) ? 'has-error' : ''; ?>">
                             <label>Year Level</label>
                             <select name="yearLvl" class="form-control">
-                                <option value="">Select Year Level</option>
+                                <option value="None">None</option>
                                 <option value="1st year" <?php if ($yearLvl == '1st year') echo 'selected'; ?>>1st year</option>
                                 <option value="2nd year" <?php if ($yearLvl == '2nd year') echo 'selected'; ?>>2nd year</option>
                                 <option value="3rd year" <?php if ($yearLvl == '3rd year') echo 'selected'; ?>>3rd year</option>

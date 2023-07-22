@@ -41,3 +41,16 @@ function closeNav() {
 
 // style.width = "100%";
 // style.width = "0%";
+
+
+function logoutConfirmation() {
+  var result = confirm("Are you sure you want to log out?");
+  if (result) {
+    // The user clicked "OK" (Yes) - Add your logout logic here
+    // alert("Logging out..."); // Optional alert for demonstration purposes
+    // Perform the logout action, e.g., redirect to logout.php or clear session data
+    window.location.href = "../../index.php"; // Replace with the URL for logout action
+  } else {
+    // The user clicked "Cancel" (No) - No specific action is taken in this case
+  }
+}
