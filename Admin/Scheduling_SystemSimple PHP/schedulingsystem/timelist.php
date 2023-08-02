@@ -47,7 +47,7 @@ td {
 
 
     function createScheduleTable($day, $conn) {
-        $query = "SELECT * FROM table_sched WHERE $day = 'green';";
+        $query = "SELECT * FROM table_sched WHERE $day = 'green' ORDER BY Start_Time;";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();

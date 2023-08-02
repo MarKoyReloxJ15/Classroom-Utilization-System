@@ -7,6 +7,12 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <style type="text/css">
+         html, body {
+    background-color: transparent;
+  }
+
+
+  
         .wrapper{
             width: 650px;
             margin: 0 auto;
@@ -96,7 +102,7 @@
             </div>
             <div class="buttons">
                 <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
-                <button type="button" class="btn btn-secondary" id="refreshBtn">Refresh</button>
+                <button type="button" class="btn btn-info" id="refreshBtn">Refresh</button>
             </div>
         </div>
     </div>

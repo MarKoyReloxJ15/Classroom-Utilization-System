@@ -3,44 +3,60 @@
 ?>
 
 <!--  -->
+<!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../images/rsuLogo.png" type="image/x-icon"/>   
+  <title>Classroom Utilization Management System</title>
 <style>
+
+
 .navbar {
     background-color: beige;
-    border-radius: 10px; /* Add rounded corners to the navigation bar */
-    margin-bottom: 0; /* Remove the bottom margin */
+    border-radius: 10px;
+    margin-bottom: 0;
 }
 
 .navbar ul {
-    display: inline; /* Set the list items to display inline */
+    display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
+    justify-content: center;
 }
 
 .navbar li {
-    display: inline; /* Set the list items to display inline */
-    margin-right: 15px; /* Add some spacing between the list items */
-    
+    margin-right: 15px;
 }
 
 .navbar a {
     text-decoration: none;
     color: #333;
-    padding: 8px 15px; /* Add horizontal and vertical padding to the links */
-    border: 1px solid #ccc; /* Use a lighter border color */
+    padding: 8px 15px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: white; /* Set the background color to match the navbar */
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s; /* Add smooth transitions */
+    background-color: white;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .navbar a:hover {
-    background-color: #333; /* Change the background color on hover */
-    color: #fff; /* Change the text color on hover */
-    border-color: #333; /* Change the border color on hover */
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
 }
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-wrap: wrap;
+    }
+
+    .navbar li {
+        margin-right: 0;
+        margin-bottom: 10px; /* Add space below each list item for better appearance */
+    }
+}
 </style>
 <script>
     window.onload = function() {
@@ -50,7 +66,7 @@
         myList.style.display = 'none';
       }
     };
-  </script>
+</script>
 </head>
 
 <body>
@@ -61,13 +77,8 @@
                 <li><a href="tablelist.php"><span class="glyphicon glyphicon-calendar"></span> Schedule</a></li>
                 <li><a href="home.php"><span class="glyphicon glyphicon-plus-sign"></span> Add Schedule</a></li>
                 <li><a href="addsubject.php"><span class="glyphicon glyphicon-plus-sign"></span> Subjects</a></li>
-                <!-- <li><a href="addfaculty.php"><span class="glyphicon glyphicon-plus-sign"></span> Faculty</a></li> -->
-                <!-- <li><a href="addcourse.php"><span class="glyphicon glyphicon-plus-sign"></span> Course</a></li> -->
                 <li><a href="addroom.php"><span class="glyphicon glyphicon-asterisk"></span> Room</a></li>
-                <!-- <li><a href="addtime.php"><span class="glyphicon glyphicon-time"></span> Time</a></li> -->
                 <li><a href="list.php"><span class="glyphicon glyphicon-list"></span> List</a></li>
-               
-                <!-- <li><a href="Index.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li> -->
             </ul>
         </nav>
     </div>
@@ -89,6 +100,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
+        
+html, body {
+    background-color: transparent;
+  }
+  
+        th{
+            text-align: center;
+        }
         table td {
             text-align: center;
         }

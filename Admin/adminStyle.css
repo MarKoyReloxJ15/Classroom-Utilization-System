@@ -186,7 +186,7 @@ body{
 .tabcontent{
     margin-right: 0;
     height: 450px;
-    background-color: rgba(239, 243, 241, 0.5);
+    background-color: rgba(239, 243, 241,0.8 );
     border-radius: 10px;
 }
 /*-- search are styling --*/
@@ -307,18 +307,21 @@ body{
         border: none;
        
         padding: 0;
-        transition-duration: 1s;
+        transition-duration: 2s;
         
        
 }
-.fulscren:hover{
+.fulscren i:hover{
     /* background-color: hsl(0, 100%, 50%,.9); */
-    border: .5px solid black;
+    /* border: .5px solid black; */
+    color:red;
+    background-color: yellow;
+    
 }
-.fulscren img{
+/* .fulscren img{
     height:100%;
     width: 100%;
-}
+} */
 
 /*----          end of schedule section              ----*/
 

@@ -5,6 +5,11 @@
 		Scheduling
 	
 	</title>
+	<style>
+		  html, body {
+    background-color: transparent;
+  }
+	</style>
 	  <script src="jquery-ui-1.10.4.custom.css" rel="stylesheet"></script>
       <script src="jquery-1.9.1.js"></script>
       <script src="jquery-ui.js"></script>

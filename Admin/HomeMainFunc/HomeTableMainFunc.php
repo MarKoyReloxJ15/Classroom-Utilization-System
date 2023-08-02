@@ -18,10 +18,11 @@ include_once("header.php");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
-        /* html, body {
+        html, body {
     background-color: transparent;
-  } */
+  }
 
+ 
  
         td a {
         margin  : 10%; /* Adjust the value as needed */

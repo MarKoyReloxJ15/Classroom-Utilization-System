@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" href="adminStyle.css">
     <link rel="icon" href="images/rsuLogo.png" type="image/x-icon"/>   
 
@@ -110,8 +112,8 @@
                       <div><!-- use to be a form-->
                         
                       
-                      <div class="overflowDiv"><!--this is the table for the home content for overflow-->
-                      <button class="fulscren" title="Full Screen"><a href="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" target="_self"><img src="images/expand.png" alt=""></a></button>     
+                      <div class="overflowDiv"><!--this is the table for the home content for overflow  ____just save for later<img src="images/expand.png" alt="">-->
+                      <button class="fulscren" title="Full Screen"><a href="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" target="_self"><i class="material-icons" style="font-size:36px">[]</i></a></button>     
                           <iframe src="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" frameborder="0" style="width: 100%;height:100%;">    
                                                  
                            </iframe>

@@ -14,6 +14,15 @@ body {
 </style>
 </head>
 <body>
+			<div align="center">
+			<legend>List of rooms</legend></fieldset>
+			<?php
+				 include_once("roomlist.php");
+			?>
+			<br>
+			<br>
+			<br>
+			<br>
             <div align="center">
             <legend>List of Faculties</legend></fieldset>
 			<?php
@@ -23,11 +32,11 @@ body {
 			<br>
 			<br>
 			<br>
-			</div>
+			</div>			
 			<!-- <div align="center">
 			<legend>List of Courses</legend></fieldset>
 			<?php 
-              include_once("corlist.php");
+             // include_once("corlist.php");
 			?>
 			<br>
 			<br>
@@ -42,15 +51,7 @@ body {
 			<br>
 			<br>
 			<br>
-			<div align="center">
-			<legend>List of rooms</legend></fieldset>
-			<?php
-				 include_once("roomlist.php");
-			?>
-			<br>
-			<br>
-			<br>
-			<br>
+			
 			<div align="center">
 			<legend>List of class time</legend></fieldset>
 			<?php

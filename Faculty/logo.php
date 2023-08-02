@@ -73,7 +73,23 @@
   <h4>Classroom Utilization Management System</h4>
 </div>
 
-<a href="../index.php" title="Logout"><i class="fas fa-sign-out-alt lgout" style="color: red;"></i></a>
+<a href="#" title="Logout" onclick="logoutConfirmation()"><i class="fas fa-sign-out-alt lgout" style="color: red;"></i></a>
 
+
+
+<script>
+
+function logoutConfirmation() {
+  var result = confirm("Are you sure you want to log out?");
+  if (result) {
+    // The user clicked "OK" (Yes) - Add your logout logic here
+    // alert("Logging out..."); // Optional alert for demonstration purposes
+    // Perform the logout action, e.g., redirect to logout.php or clear session data
+    window.location.href = "../index.php"; // Replace with the URL for logout action
+  } else {
+    // The user clicked "Cancel" (No) - No specific action is taken in this case
+  }
+}
+</script>
 </body>
 </html>
