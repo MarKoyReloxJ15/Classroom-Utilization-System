@@ -1,12 +1,12 @@
 <?php
 // Database configuration
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "room_util_sys_db";
-
+    // $host = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $database = "room_util_sys_db";
+require_once "config.php";
 // Connect to MySQL database
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 // Check the connection
 if ($conn->connect_error) {

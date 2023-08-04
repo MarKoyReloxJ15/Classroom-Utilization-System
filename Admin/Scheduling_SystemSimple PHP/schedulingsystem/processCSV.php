@@ -1,12 +1,13 @@
 <?php
 // Replace these credentials with your actual MySQL database credentials
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "room_util_sys_db";
+            // $servername = "localhost";
+            // $username = "root";
+            // $password = "";
+            // $dbname = "room_util_sys_db";
+    require_once "config.php";
 
 // Create a connection to MySQL
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 // Check connection
 function saveDataToDatabase($filePath)

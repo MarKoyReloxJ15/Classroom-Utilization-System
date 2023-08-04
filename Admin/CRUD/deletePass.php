@@ -7,13 +7,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
 // Function to delete password
 function deletePassword($id) {
     // Perform the database operation to delete the password value
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "room_util_sys_db";
+   require_once "config.php";
 
     // Create a new database connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
     // Check the connection
     if ($conn->connect_error) {

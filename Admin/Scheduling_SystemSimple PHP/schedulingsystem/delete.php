@@ -1,4 +1,7 @@
 <?php 
+// di ako sure kung kasali pa ini na kumag ini
+
+require_once "config.php";
 
  $link = mysqli_connect("localhost", "root", "", "insertion");
  

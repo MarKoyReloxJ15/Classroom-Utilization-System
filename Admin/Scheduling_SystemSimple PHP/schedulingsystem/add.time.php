@@ -1,12 +1,15 @@
 <?php 
  
- $con = mysqli_connect ('localhost', 'root', '');
+ require_once "config.php";
+ //DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME
+
+ $con = mysqli_connect (DB_SERVER, DB_USERNAME, DB_PASSWORD);
  
  if (!$con)
  {
 	 echo 'not connected to server';
  }
- if (!mysqli_select_db($con, 'insertion'))
+ if (!mysqli_select_db($con, DB_NAME))
  {
 	 echo 'database not selected';
  }

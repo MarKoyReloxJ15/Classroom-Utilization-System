@@ -1,16 +1,19 @@
 <?php
+                                        // to be honest di ini sya included
 // Include the header
 include_once("header.php");
 include_once("navbar.php");
 
 // Database connection details
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$databaseName = "insertion";
+    // $hostname = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $databaseName = "insertion";
+
+require_once "config.php";
 
 // Connect to the database
-$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+$connect = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if (!$connect) {
     die("Connection failed: " . mysqli_connect_error());
 }

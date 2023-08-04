@@ -8,14 +8,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Database connection parameters
-    $servername = "localhost";
-    $username_db = "root";
-    $password_db = "";
-    $dbname = "room_util_sys_db";
-
+            // $servername = "localhost";
+            // $username_db = "root";
+            // $password_db = "";
+            // $dbname = "room_util_sys_db";
+     require_once "config.php";
+     //       DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME
     // Create a new PDO instance
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username_db, $password_db);
-
+    // $pdo = new PDO("mysql:host=DB_SERVER;dbname=DB_NAME", DB_USERNAME, DB_PASSWORD);
+    $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
+    
     // Prepare and execute the SELECT statement
     $stmt = $pdo->prepare("SELECT * FROM student WHERE student_name = ?");
     $stmt->execute([$username]);

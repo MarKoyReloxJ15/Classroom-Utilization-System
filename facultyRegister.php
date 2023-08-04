@@ -13,12 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Save the hashed password in the database
   // Assuming you have a database connection established
-  $servername = "localhost";
-  $dbUsername = "root";
-  $dbPassword = "";
-  $dbName = "room_util_sys_db";
-
-  $pdo = new PDO("mysql:host=$servername;dbname=$dbName", $dbUsername, $dbPassword);
+      // $servername = "localhost";
+      // $dbUsername = "root";
+      // $dbPassword = "";
+      // $dbName = "room_util_sys_db";
+      require_once "config.php";
+    //  DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME
+  // $pdo = new PDO("mysql:host=DB_SERVER;dbname=DB_NAME", DB_USERNAME, DB_PASSWORD);
+  $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // Check if the password already exists or is empty in the table
@@ -133,7 +135,7 @@ include('rsuHeader.php');
   <label for="name">Name:</label>
                 <select name="name" id="name" class="form-control">
                     <?php
-                    $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
+                    $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                     if (!$connection) {
                         die('Connection failed: ' . mysqli_connect_error());
                     }

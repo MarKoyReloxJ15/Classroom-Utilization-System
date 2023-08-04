@@ -113,7 +113,7 @@
                         
                       
                       <div class="overflowDiv"><!--this is the table for the home content for overflow  ____just save for later<img src="images/expand.png" alt="">-->
-                      <button class="fulscren" title="Full Screen"><a href="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" target="_self"><i class="material-icons" style="font-size:36px">[]</i></a></button>     
+                      <button class="fulscren" title="Full Screen"><a href="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" target="_self"><i class="material-icons" style="font-size:36px">fullscreen</i></a></button>     
                           <iframe src="Scheduling_SystemSimple PHP/schedulingsystem/tablelist.php" frameborder="0" style="width: 100%;height:100%;">    
                                                  
                            </iframe>

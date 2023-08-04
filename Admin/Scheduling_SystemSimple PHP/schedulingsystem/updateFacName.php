@@ -1,11 +1,14 @@
 <?php
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'room_util_sys_db');
+// define('DB_SERVER', 'localhost');
+// define('DB_USERNAME', 'root');
+// define('DB_PASSWORD', '');
+// define('DB_NAME', 'room_util_sys_db');
 
+require_once "config.php";
 /* Attempt to connect to MySQL database */
+
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+// $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 // Check connection
 if($link === false){
@@ -127,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         $id = $_GET["id"];
 
                         // Step 1: Connect to the MySQL database
-                        $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
+                        $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                         if (!$connection) {
                             die('Connection failed: ' . mysqli_connect_error());
                         }

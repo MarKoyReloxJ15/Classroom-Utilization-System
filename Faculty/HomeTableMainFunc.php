@@ -95,25 +95,26 @@ echo "<tr>
 
 
 // your database connection
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "room_util_sys_db";
+        // $host = "localhost";
+        // $username = "root";
+        // $password = "";
+        // $database = "room_util_sys_db";
+    require_once "config.php";
 
 // select database
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if ($conn->connect_error) {
     die("Couldn't connect to the database: " . $conn->connect_error);
 }
 
 function statusFunc($faculty,$startTime,$endTime){
-            $host = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "room_util_sys_db";
+        //     $host = "localhost";
+        // $username = "root";
+        // $password = "";
+        // $database = "room_util_sys_db";
 
                 // select database
-                $conn = new mysqli($host, $username, $password, $database);
+                $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                 if ($conn->connect_error) {
                     die("Couldn't connect to the database: " . $conn->connect_error);
                 }

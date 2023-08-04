@@ -6,12 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Connect to MySQL database
-    $servername = "localhost";
-    $dbUsername = "root";
-    $dbPassword = "";
-    $dbName = "room_util_sys_db";
+            // $servername = "localhost";
+            // $dbUsername = "root";
+            // $dbPassword = "";
+            // $dbName = "room_util_sys_db";
+        require_once "config.php";
 
-    $conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbName);
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -197,7 +198,8 @@ include('rsuHeader.php');
                     <label for="advisor">Advisor</label>
                     <select name="advisor" id="advisor" class="form-control">
                         <?php
-                        $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
+                        require_once "config.php";
+                        $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                         if (!$connection) {
                             die('Connection failed: ' . mysqli_connect_error());
                         }

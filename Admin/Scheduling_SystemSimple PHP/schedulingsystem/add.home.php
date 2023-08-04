@@ -1,11 +1,11 @@
   <?php 
-
-  $con = mysqli_connect ('localhost', 'root', '', 'room_util_sys_db');
+require_once "config.php";
+  $con = mysqli_connect (DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
   if (!$con)
   {
     echo 'not connected to server';
   }
-  mysqli_select_db($con, 'room_util_sys_db') or die(mysqli_error($con));//balik dri kung di mag gana
+  mysqli_select_db($con, DB_NAME) or die(mysqli_error($con));//balik dri kung di mag gana
 
     
 

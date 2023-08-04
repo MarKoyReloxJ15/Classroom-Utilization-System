@@ -195,7 +195,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                                     <option value="None">None</option>
                                         <?php
                                         // Step 1: Connect to the MySQL database
-                                        $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
+                                        $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                                         if (!$connection) {
                                             die('Connection failed: ' . mysqli_connect_error());
                                         }

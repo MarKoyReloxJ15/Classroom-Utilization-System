@@ -2,14 +2,15 @@
 
 // php select option value from database
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$databaseName = "room_util_sys_db";
+        // $hostname = "localhost";
+        // $username = "root";
+        // $password = "";
+        // $databaseName = "room_util_sys_db";
+    require_once "config.php";
 
 // connect to mysql database
 
-$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+$connect = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 // mysql select query
 $query = "SELECT * FROM `blocks_detail` ORDER BY name,year_level";
@@ -108,14 +109,14 @@ body {
 
 // php select option value from database
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$databaseName = "room_util_sys_db";
+// $hostname = "localhost";
+// $username = "root";
+// $password = "";
+// $databaseName = "room_util_sys_db";
 
 // connect to mysql database
 
-$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+$connect = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 // mysql select query
 $query = "SELECT * FROM `rooms`ORDER BY `room` ASC";
@@ -177,14 +178,14 @@ while($row2 = mysqli_fetch_array($result2))
 
 // php select option value from database
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$databaseName = "room_util_sys_db";
+// $hostname = "localhost";
+// $username = "root";
+// $password = "";
+// $databaseName = "room_util_sys_db";
 
 // connect to mysql database
 
-$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+$connect = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 // mysql select query
 $query = "SELECT * FROM `rooms`ORDER BY `room` ASC";

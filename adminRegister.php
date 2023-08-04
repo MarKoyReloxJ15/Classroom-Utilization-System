@@ -8,13 +8,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
 
     // Database connection settings
-    $servername = "localhost";  // Replace with your MySQL server name
-    $username = "root";        // Replace with your MySQL username
-    $password_db = "";         // Replace with your MySQL password
-    $dbname = "room_util_sys_db"; // Replace with your MySQL database name
-
+            // $servername = "localhost";  // Replace with your MySQL server name
+            // $username = "root";        // Replace with your MySQL username
+            // $password_db = "";         // Replace with your MySQL password
+            // $dbname = "room_util_sys_db"; // Replace with your MySQL database name
+    require_once "config.php";
     // Create connection
-    $conn = new mysqli($servername, $username, $password_db, $dbname);
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
     // Check connection
     if ($conn->connect_error) {

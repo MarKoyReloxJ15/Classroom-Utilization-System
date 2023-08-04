@@ -1,6 +1,7 @@
 
 <?php
 include('rsuHeader.php');
+require_once "config.php";
 ?>
 
 
@@ -152,7 +153,7 @@ include('rsuHeader.php');
         <select name="blocks" id="name" class="form-control">
 
             <?php
-            $connection = mysqli_connect('localhost', 'root', '', 'room_util_sys_db');
+            $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
             if (!$connection) {
                 die('Connection failed: ' . mysqli_connect_error());
             }
@@ -232,13 +233,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Database connection parameters
-    $servername = "localhost";
-    $username = "root";
-    $dbpassword = "";
-    $dbname = "room_util_sys_db";
+            // $servername = "localhost";
+            // $username = "root";
+            // $dbpassword = "";
+            // $dbname = "room_util_sys_db";
+    
+         //   DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME
 
         // Create a new PDO instance
-        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $dbpassword);
+        // $pdo = new PDO("mysql:host=DB_SERVER;dbname=DB_NAME", DB_USERNAME, DB_PASSWORD);
+        $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
 
         // Check if the name exists in the other table
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM exprimental_studentlist WHERE name = ?");
