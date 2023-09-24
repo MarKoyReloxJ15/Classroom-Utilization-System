@@ -8,6 +8,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../../images/rsuLogo.png" type="image/x-icon"/>   
+
+
   <title>Classroom Utilization Management System</title>
 <style>
 
@@ -77,7 +79,7 @@
                 <li><a href="tablelist.php"><span class="glyphicon glyphicon-calendar"></span> Schedule</a></li>
                 <li><a href="home.php"><span class="glyphicon glyphicon-plus-sign"></span> Add Schedule</a></li>
                 <li><a href="addsubject.php"><span class="glyphicon glyphicon-plus-sign"></span> Subjects</a></li>
-                <li><a href="addroom.php"><span class="glyphicon glyphicon-asterisk"></span> Room</a></li>
+                <li><a href="addroom.php"><span class="glyphicon glyphicon-plus-sign"></span> Room</a></li>
                 <li><a href="list.php"><span class="glyphicon glyphicon-list"></span> List</a></li>
             </ul>
         </nav>
@@ -99,6 +101,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         
 html, body {
@@ -129,6 +133,14 @@ html, body {
             top: 0;
             right: 0;
         }
+
+        .secondSem{
+            display: none;
+        }
+
+        #toggleButton {
+                transition: all 0.3s ease;
+            }
     </style>
 
     <script type="text/javascript">
@@ -223,14 +235,76 @@ html, body {
         }
 
         // sortRowsByStartTime();
+
     });
+
+
+
+    function myFunction() {
+    var x = document.getElementsByClassName("firstSem");
+    var officialTables = document.getElementsByClassName("secondSem");
+    var button = document.getElementById("toggleButton");
+
+    for (var i = 0; i < x.length; i++) {
+        if (getComputedStyle(x[i]).display === "none") {
+            fadeIn(x[i]);
+        } else {
+            fadeOut(x[i]);
+        }
+    }
+
+    for (var i = 0; i < officialTables.length; i++) {
+        if (getComputedStyle(officialTables[i]).display === "none") {
+            fadeIn(officialTables[i]);
+        } else {
+            fadeOut(officialTables[i]);
+        }
+    }
+
+    // Change button text
+    if (button.textContent === "2nd Sem") {
+        button.textContent = "1st Sem";
+    } else {
+        button.textContent = "2nd Sem";
+    }
+}
+
+function fadeIn(element) {
+    element.style.opacity = 0;
+    element.style.display = "block";
+
+    var opacity = 0;
+    var interval = setInterval(function () {
+        if (opacity < 1) {
+            opacity += 0.05;
+            element.style.opacity = opacity;
+        } else {
+            clearInterval(interval);
+        }
+    }, 20);
+}
+
+function fadeOut(element) {
+    var opacity = 1;
+    var interval = setInterval(function () {
+        if (opacity > 0) {
+            opacity -= 0.05;
+            element.style.opacity = opacity;
+        } else {
+            clearInterval(interval);
+            element.style.display = "none";
+        }
+    }, 20);
+}
+
+
 </script>
 
 </head>
 
 <body>
 
-<div class="container-fluid" style="position: sticky;top:2px;z-index:10;">
+<div class="container-fluid" style="position: sticky;top:2px;z-index:11;">
     <div class="row">
         <div class="col-md-12">
             <div class="search-wrapper d-flex justify-content-end align-items-center">
@@ -239,15 +313,18 @@ html, body {
                 </div>
                 <button type="button" class="btn btn-primary mr-2" id="searchBtn">Search</button>
                 <button type="button" class="btn btn-secondary" id="refreshBtn">Refresh</button>
+               
             </div>
         </div>
     </div>
 </div>
-
+<div style="position: sticky;top:5%;z-index:10;">
 <button type="button" class="btn btn-primary" id="First">1st yr</button>
 <button type="button" class="btn btn-primary" id="Second">2nd yr</button>
 <button type="button" class="btn btn-primary" id="Third">3rd yr</button>
 <button type="button" class="btn btn-primary" id="Fourt">4rt yr</button>
+<button type="button" class="btn btn-danger" id="toggleButton" onclick="myFunction(this)">1st Sem</button>
+</div>
 
 <div  style="position: absolute;top:15%;right:40px;display:none;" >
     <br>
@@ -255,173 +332,189 @@ html, body {
 </div>
 
 <div align="center">
-    <fieldset>
-        <legend>Schedule</legend>
-        <table class="table table-bordered" style="padding:0;">
-            <thead>
-                <tr>
-                    <th>Room</th>
-                    <th>Faculty</th>
-                    <th>Block</th>
-                    <th>Subject</th>
-                    <!-- <th>Day</th> -->
-                    <th>Mon</th>
-                    <th>Tues</th>
-                    <th>Wed</th>
-                    <th>Th  </th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                    <th>Sun</th>
-                    <th>Start time</th>
-                    <th>End time</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
+
                 <?php
-                // your database connection
-                        // $host = "localhost";
-                        // $username = "root";
-                        // $password = "";
-                        // $database = "room_util_sys_db";
+                
                     require_once "config.php";
 
-                // select database
-                $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-                if ($conn->connect_error) {
-                    die("Couldn't connect to the database: " . $conn->connect_error);
-                }
+                    function myTableRow($sem, $semester,$idTable){
+                        
+                        echo"<fieldset class='$sem'>
+                        <legend>IT Department Schedule </legend>";
+                        echo"<button class='convert-button $sem btn btn-info' title='Download File CSV' style='float:right;margin-top:0;'><span class='material-symbols-outlined' style='font-size:3vh;'>file_copy</span></button>";
+                        echo "
+                        <table class=\"table table-bordered \" style=\"padding:0;\" id='$idTable'>
+                            <thead>
+                                <tr>
+                                    <th>Room</th>
+                                    <th>Faculty</th>
+                                    <th>Block</th>
+                                    <th>Subject</th>
+                                    <!-- <th>Day</th> -->
+                                    <th>Mon</th>
+                                    <th>Tues</th>
+                                    <th>Wed</th>
+                                    <th>Th</th>
+                                    <th>Fri</th>
+                                    <th>Sat</th>
+                                    <th>Sun</th>
+                                    <th>Start time</th>
+                                    <th>End time</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        ";
+                        
+                            
+                            // select database
+                            $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+                            if ($conn->connect_error) {
+                                die("Couldn't connect to the database: " . $conn->connect_error);
+                            }
 
-                // $query = "SELECT * FROM table_sched ";
-                $query = "SELECT * FROM table_sched ORDER BY blocks ASC, Start_Time";
-                $stmt = $conn->prepare($query);
-                $stmt->execute();
-                $result = $stmt->get_result();
+                            // $query = "SELECT * FROM table_sched ";
+                            $query = "SELECT * FROM table_sched WHERE Semester= '$semester' ORDER BY blocks ASC, Start_Time";
+                            $stmt = $conn->prepare($query);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
 
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['room'] . "</td>";
-                    echo "<td>" . $row['faculty'] ."<a href='updateFacName.php?id=". $row['id'] ."' title='Update Faculty Name Record' data-toggle='tooltip' class='editFacName'><span class='glyphicon glyphicon-pencil'></span></a>"."</td>";
-                    echo "<td>" . $row['blocks'] . "</td>";
-                    echo "<td>" . $row['subject'] . "</td>";
-                    // echo "<td>" . $row['weekdays'] . "</td>";
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr >";
+                                echo "<td>" . $row['room'] . "</td>";
+                                echo "<td>" . $row['faculty'] ."<a href='updateFacName.php?id=". $row['id'] ."' title='Update Faculty Name Record' data-toggle='tooltip' class='editFacName'><span class='glyphicon glyphicon-pencil'></span></a>"."</td>";
+                                echo "<td>" . $row['blocks'] ."<a href='updateTablelist/updateBlock.php?id=". $row['id'] ."' title='Update Block Name Record' data-toggle='tooltip' class='editFacName'><span class='glyphicon glyphicon-pencil'></span></a>". "</td>";
+                                echo "<td>" . $row['subject'] ."<a href='updateTablelist/updateSub.php?id=". $row['id'] ."' title='Update Subject Name Record' data-toggle='tooltip' class='editFacName'><span class='glyphicon glyphicon-pencil'></span></a>". "</td>";
+                                // echo "<td>" . $row['weekdays'] . "</td>";
 
-                    echo "<td style='background-color: " . $row['Monday'] . "'>";
-                    if ($row['Monday'] == 'green') {
-                        echo "<span class='glyphicon glyphicon-ok' style=\"color:#ccffff;\"></span>";
-                    } elseif ($row['Monday'] == 'red') {
-                        echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"></span>"; 
-                    } else {
-                        echo "Hello";
-                    }
-                    echo "</td>";
-                    
-                    echo "<td style='background-color: " . $row['Tuesday'] . "'>";
-                    if ($row['Tuesday'] == 'green') {
-                        echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"></span>";
-                    } elseif ($row['Tuesday'] == 'red') {
-                        echo "<span class='glyphicon glyphicon-remove'style=\"color:black;\"></span>"; 
-                    } else {
-                        echo "Hello";
-                    }
-                    echo "</td>";
-                    
-                    echo "<td style='background-color: " . $row['Wednesday'] . "'>";
-                    if ($row['Wednesday'] == 'green') {
-                        echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"></span>";
-                    } elseif ($row['Wednesday'] == 'red') {
-                        echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"></span>"; 
-                    } else {
-                        echo "Hello";
-                    }
-                    echo "</td>";
-                    
-                    // Repeat the above pattern for the remaining days of the week
-                    
-                    // Example for Thursday:
-                    echo "<td style='background-color: " . $row['Thursday'] . "'>";
-                    if ($row['Thursday'] == 'green') {
-                        echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"></span>";
-                    } elseif ($row['Thursday'] == 'red') {
-                        echo "<span class='glyphicon glyphicon-remove'style=\"color:black;\"></span>"; 
-                    } else {
-                        echo "Hello";
-                    }
-                    echo "</td>";
-                    
-                    // Continue for Friday, Saturday, and Sunday
-                    
-                    // Example for Friday:
-                    echo "<td style='background-color: " . $row['Friday'] . "'>";
-                    if ($row['Friday'] == 'green') {
-                        echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"></span>";
-                    } elseif ($row['Friday'] == 'red') {
-                        echo "<span class='glyphicon glyphicon-remove'style=\"color:black;\"></span>"; 
-                    } else {
-                        echo "Hello";
-                    }
-                    echo "</td>";
-                    
-                    // Repeat the same pattern for Saturday and Sunday
-                    
-                    // Example for Saturday:
-                    echo "<td style='background-color: " . $row['Saturday'] . "'>";
-                    if ($row['Saturday'] == 'green') {
-                        echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"></span>";
-                    } elseif ($row['Saturday'] == 'red') {
-                        echo "<span class='glyphicon glyphicon-remove'style=\"color:black;\"></span>"; 
-                    } else {
-                        echo "Hello";
-                    }
-                    echo "</td>";
-                    
-                    // Example for Sunday:
-                    echo "<td style='background-color: " . $row['Sunday'] . "'>";
-                    if ($row['Sunday'] == 'green') {
-                        echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"></span>";      
-                    } elseif ($row['Sunday'] == 'red') {
-                        echo "<span class='glyphicon glyphicon-remove'style=\"color:#black;\"></span>";  
-                    } else {
-                        echo "Hello";
-                    }
-                    echo "</td>";
-                    
+                                echo "<td style='background-color: " . $row['Monday'] . "'>";
+                                if ($row['Monday'] == 'green') {
+                                    echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"><p style=\"color:#FFFFFF;opacity: 0;\">Yes</p></span>";  
+                                } elseif ($row['Monday'] == 'red') {
+                                    echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"><p style=\"color:#FFFFFF;opacity: 0;\">No</p></span>"; 
+                                } else {
+                                    echo "Hello";
+                                }
+                                echo "</td>";
+                                
+                                echo "<td style='background-color: " . $row['Tuesday'] . "'>";
+                                if ($row['Tuesday'] == 'green') {
+                                    echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"><p style=\"color:#FFFFFF;opacity: 0;\">Yes</p></span>";  
+                                } elseif ($row['Tuesday'] == 'red') {
+                                    echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"><p style=\"color:#FFFFFF;opacity: 0;\">No</p></span>"; 
+                                } else {
+                                    echo "Hello";
+                                }
+                                echo "</td>";
+                                
+                                echo "<td style='background-color: " . $row['Wednesday'] . "'>";
+                                if ($row['Wednesday'] == 'green') {
+                                    echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"><p style=\"color:#FFFFFF;opacity: 0;\">Yes</p></span>";  
+                                } elseif ($row['Wednesday'] == 'red') {
+                                    echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"><p style=\"color:#FFFFFF;opacity: 0;\">No</p></span>"; 
+                                } else {
+                                    echo "Hello";
+                                }
+                                echo "</td>";
+                                
+                                // Repeat the above pattern for the remaining days of the week
+                                
+                                // Example for Thursday:
+                                echo "<td style='background-color: " . $row['Thursday'] . "'>";
+                                if ($row['Thursday'] == 'green') {
+                                    echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"><p style=\"color:#FFFFFF;opacity: 0;\">Yes</p></span>";  
+                                } elseif ($row['Thursday'] == 'red') {
+                                    echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"><p style=\"color:#FFFFFF;opacity: 0;\">No</p></span>"; 
+                                } else {
+                                    echo "Hello";
+                                }
+                                echo "</td>";
+                                
+                                // Continue for Friday, Saturday, and Sunday
+                                
+                                // Example for Friday:
+                                echo "<td style='background-color: " . $row['Friday'] . "'>";
+                                if ($row['Friday'] == 'green') {
+                                    echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"><p style=\"color:#FFFFFF;opacity: 0;\">Yes</p></span>";  
+                                } elseif ($row['Friday'] == 'red') {
+                                    echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"><p style=\"color:#FFFFFF;opacity: 0;\">No</p></span>"; 
+                                } else {
+                                    echo "Hello";
+                                }
+                                echo "</td>";
+                                
+                                // Repeat the same pattern for Saturday and Sunday
+                                
+                                // Example for Saturday:
+                                echo "<td style='background-color: " . $row['Saturday'] . "'>";
+                                if ($row['Saturday'] == 'green') {
+                                    echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"><p style=\"color:#FFFFFF;opacity: 0;\">Yes</p></span>";  
+                                } elseif ($row['Saturday'] == 'red') {
+                                    echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"><p style=\"color:#FFFFFF;opacity: 0;\">No</p></span>"; 
+                                } else {
+                                    echo "Hello";
+                                }
+                                echo "</td>";
+                                
+                                // Example for Sunday:
+                                echo "<td style='background-color: " . $row['Sunday'] . "'>";
+                                if ($row['Sunday'] == 'green') {
+                                    echo "<span class='glyphicon glyphicon-ok'style=\"color:#ccffff;\"><p style=\"color:#FFFFFF;opacity: 0;\">Yes</p></span>";    
+                                } elseif ($row['Sunday'] == 'red') {
+                                    echo "<span class='glyphicon glyphicon-remove' style=\"color:black;\"><p style=\"color:#FFFFFF;opacity: 0;\">No</p></span>"; 
+                                } else {
+                                    echo "Hello";
+                                }
+                                echo "</td>";
+                                
 
 
 
-                    echo "<td>" . date("h:i A", strtotime($row['Start_Time'])) . "</td>";
-                    echo "<td>" . date("h:i A", strtotime($row['End_Time'])) . "</td>";
+                                echo "<td>" . date("h:i A", strtotime($row['Start_Time'])) . "</td>";
+                                echo "<td>" . date("h:i A", strtotime($row['End_Time'])) . "</td>";
 
-                    echo "<td>
-                            <form class='form-horizontal' method='post' action='" . $_SERVER['PHP_SELF'] . "'>
-                                <input name='id' type='hidden' value='" . $row['id'] . "'>
-                                <button type='submit' class='btn btn-danger' name='delete'  title=\"Delete Record\"> <span class='glyphicon glyphicon-trash'></span></button>
-                            </form>
-                        </td>";
-                    echo "</tr>";
-                }
+                                echo "<td>
+                                        <form class='form-horizontal' method='post' action='" . $_SERVER['PHP_SELF'] . "'>
+                                            <input name='id' type='hidden' value='" . $row['id'] . "'>
+                                            <button type='submit' class='btn btn-danger' name='delete'  title=\"Delete Record\"> <span class='glyphicon glyphicon-trash'></span></button>
+                                        </form>
+                                    </td>";
+                                echo "</tr>";
 
-                // delete record
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-                    $id = $_POST['id'];
-                    $deleteQuery = "DELETE FROM table_sched WHERE id = ?";
-                    $stmt = $conn->prepare($deleteQuery);
-                    $stmt->bind_param("i", $id);
-                    if ($stmt->execute()) {
-                        echo '<script type="text/javascript">
-                                alert("Schedule Successfully Deleted");
-                                location="tablelist.php";
-                              </script>';
-                        exit;
-                    } else {
-                        echo 'Could not delete row: ' . $conn->error;
-                    }
-                }
+                              
+                            }
+
+                            // delete record
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+                                $id = $_POST['id'];
+                                $deleteQuery = "DELETE FROM table_sched WHERE id = ?";
+                                $stmt = $conn->prepare($deleteQuery);
+                                $stmt->bind_param("i", $id);
+                                if ($stmt->execute()) {
+                                    echo '<script type="text/javascript">
+                                            alert("Schedule Successfully Deleted");
+                                            location="tablelist.php";
+                                        </script>';
+                                    exit;
+                                } else {
+                                    echo 'Could not delete row: ' . $conn->error;
+                                }
+                            }
+
+
+                            echo"  </tbody>
+                              </table>
+                              </fieldset>
+                             ";
+
+                                }
+                            
+
+                        myTableRow('firstSem','1st Sem','fistSemID');
+                        myTableRow('secondSem','2nd Sem','secondSemID');
                 ?>
-            </tbody>
-        </table>
-    </fieldset>
-</div>
+            </div>
+   
 
 
 
@@ -429,6 +522,55 @@ html, body {
 <!-- Add Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+
+<script>
+    document.querySelectorAll(".convert-button").forEach(function(button, index) {
+  button.addEventListener("click", function() {
+    const tables = document.querySelectorAll(".table");
+    const table = tables[index]; // Get the table corresponding to the button's index
+
+    let csv = "";
+
+    for (let i = 0; i < table.rows.length; i++) {
+      const row = table.rows[i];
+      const rowData = [];
+
+      for (let j = 0; j < row.cells.length; j++) {
+        const cell = row.cells[j];
+        const cellData = cell.textContent;
+        rowData.push(`"${cellData}"`);
+      }
+
+      csv += rowData.join(",") + "\n";
+    }
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `Schedule_Semester_${index + 1}_data.csv`;
+    link.click();
+  });
+});
+
+
+
+
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var scrollpos = sessionStorage.getItem('scrollpos');
+        if (scrollpos) {
+            window.scrollTo(0, scrollpos);
+            sessionStorage.removeItem('scrollpos');
+        }
+    });
+
+    window.addEventListener("beforeunload", function (e) {
+        sessionStorage.setItem('scrollpos', window.scrollY);
+    });
+</script>
 </body>
 </html>
 <?php 

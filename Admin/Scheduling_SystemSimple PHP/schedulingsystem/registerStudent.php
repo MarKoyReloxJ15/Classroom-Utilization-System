@@ -46,13 +46,21 @@ td {
         die("Couldn't connect to the database: " . $conn->connect_error);
     }
 
+    $queryCount = "SELECT COUNT(*) AS result_count FROM student ORDER BY blocks ";
+    $stmtCount = $conn->prepare($queryCount);
+    $stmtCount->execute();
+    $resultCount = $stmtCount->get_result();
+    $rowCount = $resultCount->fetch_assoc();
+    $totalResults = $rowCount['result_count'];
+    
+
     $query = "SELECT * FROM student ORDER BY blocks";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();
-
-    echo "<div class='container'><table width='' class='table table-bordered' border='1' >
-             <caption><h2>List of Registered student</h2></caption>
+    echo" <button class=\"convert-button\" data-table-id=\"tableRegisStudent\">Convert Registered Student To CSV</button>";
+    echo "<div class='container'><table width='' id='tableRegisStudent' class='table table-bordered' border='1' >
+             <caption><h2>List of Registered student ($totalResults)</h2></caption>
             <tr>
                 <th>Student</th>
                 <th>Block</th>
@@ -105,3 +113,4 @@ td {
 <?php
 include_once("footer.php");
 ?>
+

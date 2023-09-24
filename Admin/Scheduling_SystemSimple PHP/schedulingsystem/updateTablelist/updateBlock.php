@@ -4,7 +4,7 @@
 // define('DB_PASSWORD', '');
 // define('DB_NAME', 'room_util_sys_db');
 
-require_once "config.php";
+require_once "../config.php";
 /* Attempt to connect to MySQL database */
 
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -35,15 +35,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $facultyName = $_POST["name"];
 
     // Update the faculty name in the database
-    $sql = "UPDATE table_sched SET faculty = ? WHERE id = ?";
+    $sql = "UPDATE table_sched SET blocks = ? WHERE id = ?";
     $stmt = mysqli_prepare($link, $sql);
     mysqli_stmt_bind_param($stmt, "si", $facultyName, $id);
     if(mysqli_stmt_execute($stmt)) {
-        echo "Faculty name updated successfully.";
-        header('Location: tablelist.php'); // Redirect to tablelist.php
+        echo "Blocks name updated successfully.";
+       header('Location: ../tablelist.php'); // Redirect to tablelist.php
         exit(); // Stop further execution
     } else {
-        echo "Error updating faculty name: " . mysqli_error($link);
+        echo "Error updating block name: " . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
 }
@@ -121,7 +121,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="POST">
 
             <div class="form-group">
-                <label for="name">Update Faculty Name</label><br>
+                <label for="name">Update Block Name</label><br>
                 <select name="name" id="name">
                     <option value="None">None</option>
                     <?php           
@@ -136,7 +136,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
 
                         // Retrieve the faculty names from the table
-                        $query = "SELECT Name FROM it_faculty ORDER BY Name";
+                        $query = "SELECT name FROM blocks_detail ORDER BY name";
                         $result = mysqli_query($connection, $query);
                         if (!$result) {
                             die('Query failed: ' . mysqli_error($connection));
@@ -145,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         // Generate the options for the dropdown list
                         while ($row = mysqli_fetch_assoc($result)) {
                             $selected = ($id == $row['id']) ? 'selected' : '';
-                            echo '<option value="' . $row['Name'] . '" ' . $selected . '>' . $row['Name'] . '</option>';
+                            echo '<option value="' . $row['name'] . '" ' . $selected . '>' . $row['name'] . '</option>';
                         }
 
                         // Close the database connection
@@ -156,8 +156,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-            <input type="submit" value="Update Faculty">
-            <a href="tablelist.php" class="back-link">Back</a>
+            <input type="submit" value="Update Blocks">
+            <a href="../tablelist.php" class="back-link">Back</a>
         </form>
     </div>
 

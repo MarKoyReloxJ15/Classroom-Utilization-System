@@ -2,8 +2,11 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> ayaw pag hilabti masisira buhay mo -->
 <style>
+
    body {
   margin: 0;
   padding: 0;
@@ -11,14 +14,15 @@
 
 .lgout {
   position: absolute;
-  top: 3%;
+  top: 1.6%;
   right: 2%;
-  font-size: 4vw;
+  font-size: 500%;
 }
 
 .green-bg {
   background-color: green;
   /* padding: 1% 0; */
+  position: relative;
 }
 
 .scholName {
@@ -28,7 +32,8 @@
 }
 
 .scholNLogo {
-  height: 9.5vh;
+
+  width: 8%;
   margin-right: 5px;
 }
 
@@ -40,20 +45,43 @@
 
 .titleSys h4 {
   margin: 0;
-  /* font-size: 3.7vw; */
+   font-size: 2.4vw; 
   
 }
 
 
 .scholName h1 {
   margin: 0;
-  font-size: 3.5vw;
+  font-size: 3.7vw;
   color: white;
   height: 3vh;
-  padding-bottom: 5%;
+  padding-bottom: 7%;
+  padding-top: 0;
 }
 
+@media only screen and (max-width:800px){
+        .lgout {
+          top: 0.6%;
+        font-size: 200%;
+      }
 
+         
+
+
+          }
+       
+
+@media only screen and (max-width: 400px){
+           
+      .scholNLogo {
+      height: 5%;
+    
+    }
+            
+
+
+          }
+       
 
 
 
@@ -65,16 +93,19 @@
 <div class="green-bg">
   <div class="scholName">
     <img class="scholNLogo" src="rsuLogo.png" alt="Hello to the world">
-    <h1>Romblon State University-Cajidiocan Campus</h1> 
+    <h1>Romblon State University</h1> <h1>-Cajidiocan Campus</h1>
+    
   </div>
+ 
+
 </div>
 
 <div class="titleSys">
-  <h4>Classroom Utilization Management System</h4>
+  <h4>Classroom Utilization Management System (I.T. Dep.)</h4>
 </div>
 
-<a href="#" title="Logout" onclick="logoutConfirmation()"><i class="fas fa-sign-out-alt lgout" style="color: red;"></i></a>
 
+<a href="#"   title="Logout" onclick="logoutConfirmation()"><i id='logoutIcon' class="fas fa-sign-out-alt lgout" style="color: red;"></i></a>
 
 
 <script>

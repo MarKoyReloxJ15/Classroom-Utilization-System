@@ -61,7 +61,7 @@ include('rsuHeader.php');
 <!DOCTYPE html>
 <html>
 <head>
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
      body {
       font-family: Arial, sans-serif;
@@ -101,7 +101,7 @@ include('rsuHeader.php');
         }
 
     select,
-    input[type="password"] {
+    input[type="password"],input[type="text"]{
       width: 100%;
       padding: 10px;
       margin-bottom: 20px;
@@ -124,6 +124,16 @@ include('rsuHeader.php');
     input[type="submit"]:hover {
       background-color: #45a049;
     }
+
+
+    .password-toggle {
+  float: right;
+   
+}
+
+.password-toggle:hover {
+    color: #333;
+}
   </style>
 </head>
 <body>
@@ -135,6 +145,7 @@ include('rsuHeader.php');
   <label for="name">Name:</label>
                 <select name="name" id="name" class="form-control">
                     <?php
+                    require_once "config.php";
                     $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                     if (!$connection) {
                         die('Connection failed: ' . mysqli_connect_error());
@@ -155,6 +166,7 @@ include('rsuHeader.php');
                 </select>
   <label for="password">Password:</label>
   <input type="password" id="password" name="password" required>
+  <input type="checkbox" onclick="myFunction()">Show Password <br><br>
 
   <input type="submit" value="Submit">
   <a href="facultyLogin.php">
@@ -162,6 +174,19 @@ include('rsuHeader.php');
         </a>
 </form>
 
+<script>
+ 
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+
+</script>
 </body>
 </html>
 

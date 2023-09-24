@@ -87,9 +87,9 @@ body {
 			<label class="col-md-4 control-label" for="blocks">Blocks</label> 
 			<div class="col-md-5">
 		<select  id="blocks" name="blocks"  class="form-control">
-
+        <option  value="None">None</option>
             <?php while($row1 = mysqli_fetch_array($result1)):;?>
-           
+            
 
             <option  value="<?php echo $row1[1];?>"><?php echo $row1[1];?></option>
 
@@ -126,7 +126,7 @@ $query = "SELECT * FROM `rooms`ORDER BY `room` ASC";
 $result1 = mysqli_query($connect, $query);
 
 // for method 2
-$query = "SELECT * FROM `subject`";
+$query = "SELECT * FROM `subject` ORDER BY subject_description";
 $result2 = mysqli_query($connect, $query);
 
 
@@ -254,7 +254,6 @@ while($row2 = mysqli_fetch_array($result2))
 
         </select>
         
-<!-- =========================Modification area================================= -->
 <div class="form-group">
     <label class="col-md-4 control-label" for="weekdays">Weekdays</label>
     <div class="col-md-5">
@@ -281,29 +280,7 @@ while($row2 = mysqli_fetch_array($result2))
         </label>
     </div>
 </div>
-
-
-
-
-
-				
-			
 		
-
-<!-- =============================end of modification================================================ -->
-
-
-<!-- insert here the missing data if fail -->
-
-
-<!-- up to here -->
-
-
-<!-- this is the new code for start time and end time -->
-
-
-
-				
 				<!-- Text input-->
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="start_time">Start time</label>  
@@ -322,15 +299,18 @@ while($row2 = mysqli_fetch_array($result2))
 				  </div>
 				</div>
 
-				
-				
-				
 
 
+<div class="form-group">
+    <label class="col-md-4 control-label" for="semester">Select Semester:</label>
+    <div class="col-md-5">
+        <select class="form-control" name="semester" id="semester">
+            <option value="1st Sem">1st Sem</option>
+            <option value="2nd Sem">2nd Sem</option>
+        </select>
+    </div>
+</div>
 
-<!-- end area for the new code for start time and end time-->
-
-       
 		<!-- Button -->
 				<div class="form-group"  align="right">
 				  <label class="col-md-4 control-label" for="submit"></label>

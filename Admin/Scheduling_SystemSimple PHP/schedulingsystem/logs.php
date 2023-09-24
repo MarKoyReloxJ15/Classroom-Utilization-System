@@ -1,24 +1,32 @@
 <?php
-  $path = $_SERVER['DOCUMENT_ROOT'];
-   $path .= "header.php";
-   include_once("header.php");
-   include_once("navbar.php");
+include_once("header.php");
+include_once("navbar.php");
 ?>
+
 <html>
 <head>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-
 <style>
 body {
-	background-color: white;
+    background-image: url();
+    background-color: white;
 }
-
+th {
+    text-align: center;
+}
+tr {
+     height: 30px;
+}
+td {
+    padding-top: 5px;
+    padding-left: 20px; 
+    padding-bottom: 5px;    
+    height: 20px;
+}
 </style>
 </head>
-<body>
 
+<body><br>
+<div class="container">
 <div class="container-fluid table" style="position: sticky; top: 2px; z-index: 10;">
         <div class="row">
             <div class="col-md-12">
@@ -32,65 +40,59 @@ body {
             </div>
         </div>
     </div>
+    <?php
+    echo "<tr>
+            <td>";
+    // your database connection
+            // $host = "localhost";
+            // $username = "root";
+            // $password = "";
+            // $database = "room_util_sys_db";
+        require_once "config.php";
+
+    // select database
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    if ($conn->connect_error) {
+        die("Couldn't connect to the database: " . $conn->connect_error);
+    }
+
+    $query = "SELECT * FROM logs ";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    echo "<div class='container'><table width=''  class='table table-bordered' border='1' >
+    <caption><b>Logs</b></caption><thead>
+            <tr>
+                <th>ID</th>
+                <th>User Type</th>
+                <th>Name</th>
+                <th>Timestamp</th>
+            </tr></thead><tbody>";
+           
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row['ID_logs'] . "</td>";
+        echo "<td>" . $row['UserType'] . "</td>";
+        echo "<td>" . $row['Name'] . "</td>";
+        echo "<td>" . $row['Timestamp'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</tbody></table></div>";
+
+    // delete record
+   
+    ?>
+    </fieldset>
+    </form>
+</div>
+</div>
+</div>
+</div>
 
 
-    <button type="button" class="btn btn-primary mr-2" style="float: right;" onclick="window.location.href='logs.php'">Logs</button>
-<br><br>
 
-<button class="convert-button" data-table-id="tableroomlist">Convert Table  to CSV</button>
-<div align="center">
-
-			<legend>List of rooms</legend></fieldset>
-			<?php
-				 include_once("roomlist.php");
-			?>
-			<br>
-			<br>
-			<br>
-			<br>
-			<button class="convert-button" data-table-id="tablefaclist">Convert Table  to CSV</button>
-            <div align="center">
-			
-            <legend>List of Faculties</legend></fieldset>
-			<?php
-				include_once("faclist.php");
-			?>
-			<br>
-			<br>
-			<br>
-			<br>
-			</div>			
-			<!-- <div align="center">
-			<legend>List of Courses</legend></fieldset>
-			<?php 
-             // include_once("corlist.php");
-			?>
-			<br>
-			<br>
-			<br>
-			<br> -->
-			<button class="convert-button" data-table-id="tablesublist">Convert Table  to CSV</button>
-			<div align="center">
-			<legend>List of Subjects</legend></fieldset>
-			<?php 
-			  include_once("sublist.php");
-			?>
-			<br>
-			<br>
-			<br>
-			<br>
-			
-			<div align="center">
-			<legend>List of class time</legend></fieldset>
-			<?php
-				include_once("timelist.php");
-			?>
-
-
-			
-			
-
-			<script>
+<script>
 
 // for search button
 
@@ -137,43 +139,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-
-
-// for csv
-	document.querySelectorAll(".convert-button").forEach(function(button) {
-  button.addEventListener("click", function() {
-    const tableId = button.getAttribute("data-table-id");
-    const table = document.getElementById(tableId);
-
-    let csv = "";
-
-    for (let i = 0; i < table.rows.length; i++) {
-      const row = table.rows[i];
-      const rowData = [];
-
-      for (let j = 0; j < row.cells.length; j++) {
-        const cell = row.cells[j];
-        const cellData = cell.textContent;
-        rowData.push(`"${cellData}"`);
-      }
-
-      csv += rowData.join(",") + "\n";
-    }
-
-    const blob = new Blob([csv], { type: "text/csv" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `${tableId}_data.csv`;
-    link.click();
-  });
-});
-
-
-
 </script>
+
 </body>
 </html>
+
 <?php
-   include_once("footer.php");
-   include_once("navbar.php");
+include_once("footer.php");
 ?>

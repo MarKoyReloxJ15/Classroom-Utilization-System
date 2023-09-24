@@ -7,11 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST["name"];
     $password = $_POST["password"];
 
-    // Database connection settings
-            // $servername = "localhost";  // Replace with your MySQL server name
-            // $username = "root";        // Replace with your MySQL username
-            // $password_db = "";         // Replace with your MySQL password
-            // $dbname = "room_util_sys_db"; // Replace with your MySQL database name
+   
     require_once "config.php";
     // Create connection
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -21,13 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // ==================================================
+
+    $checkNameQuery = "SELECT Name FROM it_faculty WHERE Name = '$name';";
+$checkNameResult = $conn->query($checkNameQuery);
+
+if ($checkNameResult && $checkNameResult->num_rows > 0) {
+    // The name exists in the 'it_faculty' table
     // Check the number of existing admin accounts
-    $countQuery = "SELECT COUNT(*) as num_rows FROM admin_register";
+    $countQuery = "SELECT COUNT(*) AS num_rows FROM admin_register";
     $countResult = $conn->query($countQuery);
+
     if ($countResult) {
         $row = $countResult->fetch_assoc();
         $numRows = $row['num_rows'];
-        if ($numRows >= 5) {
+
+        if ($numRows >= 3) {
             $_SESSION['message'] = "Cannot register. Maximum admin accounts reached.";
             header("Location: adminRegister.php");
             exit;
@@ -37,7 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: adminRegister.php");
         exit;
     }
+} else {
+    $_SESSION['message'] = "Name not found in the 'it_faculty' table.";
+    header("Location: adminRegister.php");
+    exit;
+}
 
+
+    // ================================================
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -75,51 +87,11 @@ include('rsuHeader.php');
 
 <head>
 <link rel="icon" href="rsuLogo.png" type="image/x-icon"/>   
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  
 
 <title>Classroom Utilization Management System</title>
     <style>
-        /* .scholNLogo {
-            position: relative;
-            width: 8%;
-            height: 70%;
-            margin-right: 10px;
-        }
-
-        .scholName {
-
-            position: relative;
-            height: 100%;
-            background-color: #00AF50;
-            border-radius: 1px;
-            border: 1px solid #41719C;
-
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        } */
-
-      /* body {
-            position: relative;
-        } */
-        /* body::before {
-            co  ntent: "";
-            background-image: url(rsuLogo.png);
-            width: 90%;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-            opacity: 0.1;
-            position: absolute;
-            top: 20%;
-            left: 4.5%;
-            right: 0;
-            bottom: 0;
-
-        } */
-
-        h2 {
+         h2 {
             color: #333333;
         }
 
@@ -131,6 +103,8 @@ include('rsuHeader.php');
             margin: 0 auto;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.1);
+            font-size: 120%;
+            font-weight: bold;
         }
 
         button {
@@ -174,32 +148,59 @@ include('rsuHeader.php');
         input[type="submit"]:hover {
             background-color: black;
         }
+
+
+
+
+        .contShowpass {
+  float: right;
+   
+}
+
+.password-toggle:hover {
+    color: #333;
+}
     </style>
 </head>
 
 <body>
-    <!-- <div class="scholNameCont">
-        <div class="scholName">
-            <img class="scholNLogo" src="rsuLogo.png">
-            <h1>Romblon State University-Cajidiocan Campus</h1>
-        </div> -->
+
+<form method="POST" action="adminRegister.php">
+        <h2>Admin Registration Form</h2>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="password">Password: </label>
 
 
-        <form method="POST" action="adminRegister.php">
-            <h2>Admin Registration Form</h2>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
+        <input type="password" name="password" id="password" required>
 
-            <input type="submit" value="Register">
-            <a href="adminLogin.php">
-                <button type="button">Back</button>
-            </a>
-        </form>
+        <input type="checkbox" onclick="myFunction()">Show Password <br><br>
 
+        
+        <input type="submit" value="Register">
+        <a href="adminLogin.php">
+            <button type="button">Back</button>
+        </a>
+    </form>
 </body>
 
+
+<script>
+
+
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+   
+   
+
+</script>
 </html>
 

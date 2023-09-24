@@ -31,7 +31,7 @@
                                 <li class="tablinks" onclick="openTab(event, 'Home')">Home</li>
                                 <li class="tablinks" onclick="openTab(event, 'Blocks')">Blocks</li>
                                 <li class="tablinks" onclick="openTab(event, 'Schedules')">Schedules</li>
-                                <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructors</li>
+                                <li class="tablinks" onclick="openTab(event, 'Instructor')">Faculty</li>
                                 <li class="tablinks" onclick="openTab(event, 'List')">List</li>
                                 <li class="tablinks" onclick="logoutConfirmation()"><a href="#" style="text-decoration: none;">Logout</a></li>
                             </ul>
@@ -56,7 +56,7 @@
                                 <li id="HomeLi"class="tablinks" onclick="openTab(event, 'Home')">Home</li>
                                 <li class="tablinks" onclick="openTab(event, 'Blocks')">Blocks</li>
                                 <li class="tablinks" onclick="openTab(event, 'Schedules')">Schedules</li>
-                                <li class="tablinks" onclick="openTab(event, 'Instructor')">Instructor</li>
+                                <li class="tablinks" onclick="openTab(event, 'Instructor')">Faculty</li>
                                 <li class="tablinks" onclick="openTab(event, 'List')">List</li>
                                 <li class="tablinks" onclick="logoutConfirmation()"><a href="#" style="text-decoration: none;color:black">Logout</a></li>
                             </ul>
@@ -191,5 +191,6 @@
     </footer>
    <script src="adminScript.js"></script><!--for the javascript styling-->
 
+  
 </body>
 </html>

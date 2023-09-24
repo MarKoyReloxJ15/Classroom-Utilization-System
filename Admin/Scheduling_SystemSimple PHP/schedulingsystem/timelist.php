@@ -26,7 +26,8 @@ td {
 </head>
 
 <body><br>
-<div class="container">
+<div class="container"><br>
+<legend><h3>First Semester Schedule</h3></legend>
     <body>
     <?php
     echo "<tr>
@@ -47,21 +48,32 @@ td {
     // modified area for multiple tables from monday to sunday
 
 
-    function createScheduleTable($day, $conn) {
-        $query = "SELECT * FROM table_sched WHERE $day = 'green' ORDER BY Start_Time;";
+    function createScheduleTable($day, $conn,$seM) {
+        $queryCount = "SELECT COUNT(*) AS result_count FROM table_sched WHERE $day = 'green' AND Semester = ?";
+        $stmtCount = $conn->prepare($queryCount);
+        $stmtCount->bind_param("s", $seM);
+        $stmtCount->execute();
+        $resultCount = $stmtCount->get_result();
+        $rowCount = $resultCount->fetch_assoc();
+        $totalResults = $rowCount['result_count'];
+
+        $query = "SELECT * FROM table_sched WHERE $day = 'green' AND Semester = ? ORDER BY Start_Time;";
         $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $seM);
         $stmt->execute();
         $result = $stmt->get_result();
     
-        echo "<div class='container'><table width='' class='table table-bordered' border='1'>
-                <tr><th colspan=\"5\" style=\"background-color: #008000; color: white;\">$day</th></tr>
+        echo "<button class='btn btn-primary convert-button'data-table-id='$day--$seM' style='float:left;'>Convert Table to CSV</button>";
+    
+        echo "<div class='container'><table width='' id='$day--$seM' class='table table-bordered' border='1'><thead>
+                <tr><th colspan=\"5\" style=\"background-color: #008000; color: white;\">$day ($totalResults)</th></tr>
                 <tr>
                     <th style=\"background-color: Yellow;\">Room</th>
                     <th style=\"background-color: lightblue;\">Blocks</th>
                     <th style=\"background-color: lightblue;\">Faculty</th>
                     <th style=\"background-color: #7BCCB5;\">Start time</th>
                     <th style=\"background-color: #FFB4B4;\">End time</th>
-                </tr>";
+                </tr></thead><tbody>";
 
 
     
@@ -75,16 +87,26 @@ td {
             echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['End_Time'])) . "</td>";
             echo "</tr>";
         }
-        echo "</table></div>";
+        echo "</tbody></table></div>";
     }
     
     // for the creation of table from Monday to sunday
 
+  function semListSched($conn,$seM){
     $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 
-        foreach ($days as $day) {
-            createScheduleTable($day, $conn);
-        }
+    foreach ($days as $day) {
+        createScheduleTable($day, $conn,$seM);
+    }
+
+  }
+
+
+
+
+  semListSched($conn,'1st Sem');
+ 
+
 
 
     // end of modified area
@@ -111,9 +133,51 @@ td {
 </div>
 </div>
 </div>
-</body>
-</html>
 
+
+<div class="container"><br>
+<legend style="text-align: center;"><h3>Second Semester Schedule</h3></legend>
+
+<?php
+semListSched($conn,'2nd Sem');
+ 
+?>
+
+</fieldset>
+    </form>
+</div>
+</div>
+</div>
+</div>
+<script>
+//     document.querySelectorAll(".convert-button").forEach(function(button, index) {
+//   button.addEventListener("click", function() {
+//     const tables = document.querySelectorAll(".table");
+//     const table = tables[index]; // Get the table corresponding to the button's index
+
+//     let csv = "";
+
+//     for (let i = 0; i < table.rows.length; i++) {
+//       const row = table.rows[i];
+//       const rowData = [];
+
+//       for (let j = 0; j < row.cells.length; j++) {
+//         const cell = row.cells[j];
+//         const cellData = cell.textContent;
+//         rowData.push(`"${cellData}"`);
+//       }
+
+//       csv += rowData.join(",") + "\n";
+//     }
+
+//     const blob = new Blob([csv], { type: "text/csv" });
+//     const link = document.createElement("a");
+//     link.href = URL.createObjectURL(blob);
+//     link.download = `Whole_Day_Schedule_${index + 1}_data.csv`;
+//     link.click();
+//   });
+// });
+</script>
 <?php
 include_once("footer.php");
 ?>

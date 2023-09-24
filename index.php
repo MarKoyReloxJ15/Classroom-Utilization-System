@@ -10,57 +10,12 @@ include('rsuHeader.php');
     <title>Options</title>
     <style>
        
-        /* .scholNLogo {
-            position: relative;
-            width: 8%;
-            height: 70%;
-            margin-right: 10px;
-        }
-
-        .scholName {
-
-            position: relative;
-            height: 100%;
-            background-color: #00AF50;
-            border-radius: 1px;
-            border: 1px solid #41719C;
-
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-
-            border-radius: 2vh;
-        } */
-
-        /* body {
-            position: relative;
-
-
-        } */
-
-        /* body::before {
-            content: "";
-            background-image: url(rsuLogo.png);
-            width: 90%;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-            opacity: 0.2;
-            position: absolute;
-            top: 20%;
-            left: 4.5%;
-            right: 0;
-            bottom: 0;
-
-        } */
 
         form {
             
             
             position: relative;
-            background-color: rgb(250,248,245,0.4);
+            background-color: rgb(250,248,245,0.8);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             width: 300px;
             padding: 20px;
@@ -76,6 +31,7 @@ include('rsuHeader.php');
         input[type="radio"] {
             margin-bottom: 10px;
             font-weight: bold;
+           
           
         }
 
@@ -87,7 +43,11 @@ include('rsuHeader.php');
             cursor: pointer;
             border-radius: 5px;
         }
+        .radioCont{         
+         text-align: left;
+         margin: 0 30%;
 
+        }
         input[type="submit"]:hover {
             background-color: darkgreen;
         }
@@ -95,20 +55,15 @@ include('rsuHeader.php');
 </head>
 
 <body>
-    <!-- <div class="scholNameCont">
-        <div class="scholName">
-            <img class="scholNLogo" src="rsuLogo.png">
-            <h1>Romblon State University-Cajidiocan Campus</h1>
-        </div> -->
-
-    </div>
-
+   
+<br><br>
     <form method="POST" action="redirect.php">
         <h2>Select an option</h2>
-        <input type="radio" name="option" value="option1" required> Admin<br>
-        <input type="radio" name="option" value="option2" required> Faculty<br>
-        <input type="radio" name="option" value="option3" required > Student<br><br>
-
+        <div class="radioCont">
+        <input type="radio" id="adminRadio" name="option" value="option1" required><label for="adminRadio">Admin</label><br>
+        <input type="radio" id="facRadio" name="option" value="option2" required><label for="facRadio">Faculty</label><br>
+        <input type="radio" id="studRadio" name="option" value="option3" required><label for="studRadio">Student</label><br><br>
+        </div>
         <input type="submit" value="Submit">
     </form>
 </body>

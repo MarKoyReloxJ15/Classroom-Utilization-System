@@ -54,3 +54,6 @@ function logoutConfirmation() {
     // The user clicked "Cancel" (No) - No specific action is taken in this case
   }
 }
+
+
+

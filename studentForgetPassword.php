@@ -6,51 +6,32 @@ require_once "config.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $name = $_POST["name"];
-    $block = $_POST["blocks"];
     $studentID = $_POST["studentID"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
 
-   
-        // Create a new PDO instance
-        // $pdo = new PDO("mysql:host=DB_SERVER;dbname=DB_NAME", DB_USERNAME, DB_PASSWORD);
-        $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
+    // Create a new PDO instance
+    $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        // Check if the name exists in the other table
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM exprimental_studentlist WHERE name = ?");
-        $stmt->execute([$name]);
-        $existingNameCount = $stmt->fetchColumn();
-    
-        // Check if the name already has a password in the student table
-        $stmt = $pdo->prepare("SELECT password FROM student WHERE student_name = ?");
-        $stmt->execute([$name]);
-        $existingPassword = $stmt->fetchColumn();
-    
-        if ($existingNameCount > 0 && !empty($existingPassword)) {
-            // Name exists in the other table and already has a password, disallow data insertion
-            echo "<script>alert('You are not allowed to insert data!');</script>";
-        } elseif ($existingNameCount > 0) {
-            // Name exists in the other table, but doesn't have a password yet
-    
-            // Hash the password
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $hashedStudentID = password_hash($studentID, PASSWORD_DEFAULT);
-    
-            // Prepare and execute the INSERT statement
-            $stmt = $pdo->prepare("INSERT INTO student (student_name, blocks, password, studentID,email) VALUES (?, ?, ?,?,?)");
-            $stmt->execute([$name, $block, $hashedPassword, $hashedStudentID,  $email]);
-    
-            // Check if the insertion was successful
-            if ($stmt->rowCount() > 0) {
-                echo "<script>window.location.href = 'studentLogin.php?success=1';</script>";
-            } else {
-                echo "<script>alert('Registration Failed!');</script>";
-            }
-        } else {
-            // Name doesn't exist in the other table
-            echo "<script>alert('Name not found in the other table!');</script>";
-        }
+    // Check if the student exists in the student table
+    $stmt = $pdo->prepare("SELECT student_name, studentID FROM student WHERE student_name = ?");
+    $stmt->execute([$name]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($studentID, $user['studentID'])) {
+        // Student exists in the student table and matches the hashed studentID
+        // Delete the account
+        $deleteStmt = $pdo->prepare("DELETE FROM student WHERE student_name = ?");
+        $deleteStmt->execute([$name]);
+
+        echo "<script>alert('Account deleted successfully!');</script>";
+        header("Location: student_register.php");
+        exit();
+    } else {
+        // Student not found in the database or studentID doesn't match
+        echo "<script>alert('Student not found in the database or studentID does not match!');</script>";
     }
+}
+
+
     
 ?>
 
@@ -195,83 +176,27 @@ include('rsuHeader.php');
 </head>
 
 <body>
-    <!-- <div class="scholNameCont">
-        <div class="scholName">
-            <img class="scholNLogo" src="rsuLogo.png">
-            <h1>Romblon State University-Cajidiocan Campus</h1>
-        </div> -->
-
-    </div>
-
-    <form method="POST" action="student_register.php">
+    
+    <form method="POST" action="studentForgetPassword.php">
         <h2>Student Registration Form </h2>
-        <label for="name">Name:</label>
+
         <div class="autocomplete" style="width:300px;">
+        <label for="name">Name:</label>
         <input type="text" id="name" name="name" autocomplete="off" required>
         </div><br>
 
+
         <label for="studentID">Student ID:</label>        
         <input type="text" id="" name="studentID" required><br><br>
+       
 
-        <label for="email">Email :</label>        
-        <input type="text" id="" name="email" required><br><br>
-        
+        <input type="submit" value="Submit">
 
-        <label for="blocks">Block:</label>
-        <select name="blocks" id="name" class="form-control">
-
-            <?php
-            $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-            if (!$connection) {
-                die('Connection failed: ' . mysqli_connect_error());
-            }
-
-            $query = "SELECT Name FROM blocks_detail ORDER BY Name";
-            $result = mysqli_query($connection, $query);
-            if (!$result) {
-                die('Query failed: ' . mysqli_error($connection));
-            }
-
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<option value="' . $row['Name'] . '">' . $row['Name'] . '</option>';
-            }
-
-            mysqli_close($connection);
-            ?>
-            <option value="Irregular">Irregular</option>
-        </select>
-
-      <br><br>
-
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-        <input type="checkbox" onclick="myFunction()">Show Password <br><br>
-
-        <input type="submit" value="Register">
         <a href="studentLogin.php">
             <button type="button">Back</button>
         </a>
+        
     </form>
-
-
-   
-
-
-    <script>
-
-
-function myFunction() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-
-    </script>
-
 
 
 
@@ -405,6 +330,10 @@ var countries = <?php
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("name"), countries);
 </script>
+
+
+
+
 </body>
 
 </html>

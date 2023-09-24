@@ -49,11 +49,11 @@ td {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    echo "<div class='container'><table width='' class='table table-bordered' border='1' >
+    echo "<div class='container'><table width='' id='tableroomlist' class='table table-bordered' border='1' ><thead>
             <tr>
                 <th>Rooms</th>
                 <th>Action</th>
-            </tr>";
+            </tr></thead><tbody>";
          
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
@@ -66,7 +66,7 @@ td {
             </td>";
         echo "</tr>";
     }
-    echo "</table></div>";
+    echo "</tbody></table></div>";
 
     // delete record
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
@@ -77,7 +77,7 @@ td {
         if ($stmt->execute()) {
             echo '<script type="text/javascript">
                     alert("Row Successfully Deleted");
-                    location="roomlist.php";
+                    location="list.php";
                   </script>';
             exit;
         } else {
@@ -91,6 +91,24 @@ td {
 </div>
 </div>
 </div>
+
+
+<!-- this code must be careful in how many times it is used it might have some storage issues in cookies -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var scrollpos = sessionStorage.getItem('scrollpos');
+        if (scrollpos) {
+            window.scrollTo(0, scrollpos);
+            sessionStorage.removeItem('scrollpos');
+        }
+    });
+
+    window.addEventListener("beforeunload", function (e) {
+        sessionStorage.setItem('scrollpos', window.scrollY);
+    });
+</script>
+
 </body>
 </html>
 

@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         }
 
                                         // Step 2: Retrieve data from the database
-                                        $query = "SELECT Name FROM it_faculty";
+                                        $query = "SELECT Name FROM it_faculty ORDER BY Name";
                                         $result = mysqli_query($connection, $query);
                                         if (!$result) {
                                             die('Query failed: ' . mysqli_error($connection));

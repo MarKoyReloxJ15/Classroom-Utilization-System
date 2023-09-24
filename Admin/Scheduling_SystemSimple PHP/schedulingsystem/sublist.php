@@ -44,17 +44,17 @@ td {
         die("Couldn't connect to the database: " . $conn->connect_error);
     }
 
-    $query = "SELECT * FROM subject";
+    $query = "SELECT * FROM subject ORDER BY subject_description";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    echo "<div class='container'><table width='' class='table table-bordered' border='1' >
+    echo "<div class='container'><table width='' id='tablesublist' class='table table-bordered' border='1' ><thead>
             <tr>
                 <th>Code</th>
                 <th>Subject</th>
                 <th>Action</th>
-            </tr>";
+            </tr></thead><tbody>";
            
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
@@ -68,7 +68,7 @@ td {
             </td>";
         echo "</tr>";
     }
-    echo "</table></div>";
+    echo "</tbody></table></div>";
 
     // delete record
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subject_id'])) {

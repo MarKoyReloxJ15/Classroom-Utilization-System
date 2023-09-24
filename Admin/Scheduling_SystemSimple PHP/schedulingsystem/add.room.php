@@ -26,7 +26,7 @@
  {
 	 echo '<script type="text/javascript">
                       alert("New Room Reserved!");
-                         location="tablelist.php";
+                         location="addroom.php";
                            </script>';
  }
  

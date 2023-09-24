@@ -12,6 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // $dbName = "room_util_sys_db";
         require_once "config.php";
 
+        date_default_timezone_set('Asia/Manila');
+$currentTimestamp = time();
+$dateInPhilippines = date('Y-m-d H:i:s', $currentTimestamp);
+
+$userType = 'Faculty';
+
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
     if (!$conn) {
@@ -34,9 +40,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Set session variables
                 $_SESSION['username'] = $username;
 
+                $stmt = $conn->prepare("INSERT INTO logs (UserType, Name, TimeStamp) VALUES (?, ?, ?)");
+                $stmt->bind_param('sss',$userType, $username, $dateInPhilippines);
+            
+                // Execute the insert statement
+                if ($stmt->execute()) {
+                    $_SESSION['message'] = "Registration successful. Data inserted into the database.";
+                   
+                } else {
+                    $_SESSION['message'] = "Error: " . $stmt->error;
+                  
+                }
+            
+                // Close the prepared statement and database connection
+                $stmt->close();
+                $conn->close();
+
+                
+
                 // Redirect to the dashboard or any other page
                 header('Location: Faculty/HomeTableMainFunc.php');
                 exit();
+
             } else {
                 echo "<script>alert('Invalid username or password!')</script>";  
             }
@@ -223,7 +248,7 @@ include('rsuHeader.php');
                 <label for="password">Password</label>
                 <div class="password-container">
                     <input type="password" name="password" id="password" class="form-control password-input">
-                    <i class="password-toggle far fa-eye" onclick="togglePasswordVisibility()"></i>
+                    <input type="checkbox" onclick="myFunction()">Show Password <br><br>
                 </div>
                 </div>
 
@@ -234,20 +259,14 @@ include('rsuHeader.php');
 
 
         <script>
-  function togglePasswordVisibility() {
-    const passwordField = document.getElementById('password');
-    const passwordToggle = document.querySelector('.password-toggle');
-
-    if (passwordField.type === 'password') {
-      passwordField.type = 'text';
-      passwordToggle.classList.remove('fa-eye');
-      passwordToggle.classList.add('fa-eye-slash');
-    } else {
-      passwordField.type = 'password';
-      passwordToggle.classList.remove('fa-eye-slash');
-      passwordToggle.classList.add('fa-eye');
-    }
+  function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
   }
+}
 </script>
 </body>
 

@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         }
 
                                         // Step 2: Retrieve data from the database
-                                        $query = "SELECT name FROM blocks_detail";
+                                        $query = "SELECT name FROM blocks_detail ORDER BY name,year_level";
                                         $result = mysqli_query($connection, $query);
                                         if (!$result) {
                                             die('Query failed: ' . mysqli_error($connection));
@@ -152,10 +152,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
 
 
-                        <!-- <div class="form-group <?php echo (!empty($advisory_err)) ? 'has-error' : ''; ?>"> it and dating input text ng advisory na mano mano
+                        <!-- <div class="form-group <?php //echo (!empty($advisory_err)) ? 'has-error' : ''; ?>"> it and dating input text ng advisory na mano mano
                             <label>Advisory</label>
-                            <input type="text" name="advisory" class="form-control" value="<?php echo $advisory; ?>">
-                            <span class="help-block"><?php echo $advisory_err;?></span>
+                            <input type="text" name="advisory" class="form-control" value="<?php //echo $advisory; ?>">
+                            <span class="help-block"><?php //echo $advisory_err;?></span>
                         </div> -->
 
                         <input type="submit" class="btn btn-primary" value="Submit">

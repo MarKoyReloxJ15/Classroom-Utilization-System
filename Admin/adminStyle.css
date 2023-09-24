@@ -28,7 +28,7 @@ body{
 
 .secCont{
     width: 100%;
-    height: 630px;
+    height: 630px;/* kailangan muna e consider*/
     background-color: rgba(231,230,230, .5);
     z-index: 8;    
 }
@@ -119,7 +119,9 @@ body{
 
 
 /*-------------------For later commment it the first part-----------------------------*/
-
+.tablinks{
+    cursor: pointer;
+}
 
 
 .G_tFCont{
@@ -367,7 +369,8 @@ body{
 footer{
     background-color: black;
     height: 100px;
-}
+  }
+
 
 /* ---------end for styling section---------- */
 

@@ -111,15 +111,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="pull-left">Instructor </h2>
-                        <a href="create.php" class="btn btn-success pull-right">Add New Instructor</a>
+                        <h2 class="pull-left">Faculty </h2>
+                        <a href="create.php" class="btn btn-success pull-right">Add New Faculty</a>
                     </div>
                     <?php
                     // Include config file
                     require_once "config.php";
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM it_faculty";
+                    $sql = "SELECT * FROM it_faculty ORDER BY Name";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo "<table class='table table-bordered table-striped'>";

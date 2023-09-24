@@ -44,17 +44,24 @@ require_once "config.php";
         die("Couldn't connect to the database: " . $conn->connect_error);
     }
 
-    $query = "SELECT * FROM it_faculty";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $queryCount = "SELECT COUNT(*) AS result_count FROM it_faculty";
+$stmtCount = $conn->prepare($queryCount);
+$stmtCount->execute();
+$resultCount = $stmtCount->get_result();
+$rowCount = $resultCount->fetch_assoc();
+$totalResults = $rowCount['result_count'];
 
-    echo "<div class='container'><table width='' class='table table-bordered' border='1' >
+$query = "SELECT * FROM it_faculty ORDER BY Name";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
+
+    echo "<div class='container'><table width='' id='tablefaclist' class=' table table-bordered' border='1' ><thead>
             <tr>
-                <th>Faculty</th>
+                <th>Faculty ($totalResults)</th>
                 <th>Advisory</th>
               
-            </tr>";
+            </tr></thead><tbody>";
                             //echo<th>Action</th>
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
@@ -68,7 +75,7 @@ require_once "config.php";
         //     </td>";
         // echo "</tr>";
     }
-    echo "</table></div>";
+    echo "</tbody></table></div>";
 
     // delete record
     // if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['faculty_id'])) {

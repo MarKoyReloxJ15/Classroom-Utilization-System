@@ -201,7 +201,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                                         }
 
                                         // Step 2: Retrieve data from the database
-                                        $query = "SELECT name FROM blocks_detail";
+                                        $query = "SELECT name FROM blocks_detail ORDER BY name,year_level";
                                         $result = mysqli_query($connection, $query);
                                         if (!$result) {
                                             die('Query failed: ' . mysqli_error($connection));
