@@ -58,6 +58,7 @@ td {
     }
     date_default_timezone_set('Asia/Manila');
     $currenttimestamp = date("Y-m-d 00:00:00");
+    echo $currenttimestamp;
     $query = "SELECT * FROM request_table WHERE day_req = '$currenttimestamp' ORDER BY request_room, req_starttime;";
       
     $stmt = $conn->prepare($query);
@@ -108,7 +109,7 @@ td {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         $id = $_POST['id'];
         $deleteQuery = "UPDATE request_table
-        SET Status = 'Approved', day_req = day_req
+        SET Status = 'Approved', day_req =  ' $currenttimestamp'
         WHERE id = ?;
         ";
         $stmt = $conn->prepare($deleteQuery);

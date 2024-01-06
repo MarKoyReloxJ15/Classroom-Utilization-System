@@ -2,8 +2,27 @@
 //include_once("header.php");
 ?>
 
+
+
 <?php
  include_once('heartbeat.php');
+?>
+
+
+
+
+<?php
+
+
+if(isset($_SESSION['username'])) {
+    // User is logged in
+    $username = $_SESSION['username'];
+    $deviceusername = $username;
+} else {
+    $deviceusername = 'You are not logged in'; // Updated message
+    // header('Location: ../index.php'); // Redirect to the login page or homepage
+    // exit(); // Make sure to exit the script after redirecting
+}
 ?>
 
 
@@ -94,7 +113,7 @@ body::before {
     z-index: -1;
 }
 td a {
-        margin  : 10%; /* Adjust the value as needed */
+        margin  : 0%; /* Adjust the value as needed */
         }
         th{
             text-align: center;
@@ -104,12 +123,12 @@ td a {
         table th td{
                 /* font-size: 100px; */
                 font-size: 4vw;
+               
             }
-
-       
 
         .officialTable{
             display: none;
+           
             
         }
 
@@ -127,16 +146,18 @@ td a {
         .statusAvaiBut{
             border-radius: 1vw;
         }
-        .cont{
+         .cont {
             width: 90%;
-            margin:auto auto;
+            margin:0 auto;
+            padding: 0;
+
         }
 
         .redbut{
             cursor: pointer;
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 640px) {
             .hide-column {
                 display: none;
             }
@@ -160,21 +181,6 @@ include 'logo.php';
 ?>
 
 
-<?php
-
-
-if(isset($_SESSION['username'])) {
-    // User is logged in
-    $username = $_SESSION['username'];
-
-    $deviceusername = $username;
-    
-    
-} else {
-    $deviceusername = 'user name is not here';
-}
-
-?>
 
 
 <body><br>
@@ -264,9 +270,9 @@ function statusFunc($faculty,$startTime,$endTime,$room){
                                             date_default_timezone_set('Asia/Manila');
                                             $currenttimestamp = date("Y-m-d 00:00:00");
 
-                                            $query = "SELECT * FROM request_table WHERE Status = 'Approved' AND day_req = '$currenttimestamp'";
-                                          // $query = "SELECT * FROM request_table WHERE Status = 'Approved' AND DATE(day_req) = CURDATE()";
-                                        //   echo $query;
+                                            //$query = "SELECT * FROM request_table WHERE Status = 'Approved' AND day_req = '$currenttimestamp '";
+                                         $query = "SELECT * FROM request_table WHERE Status = 'Approved' AND DATE(day_req) = CURDATE()";
+                                          // echo $query;
                                             $stmt = $conn->prepare($query);
                                             $stmt->execute();
                                             $result = $stmt->get_result();
@@ -396,7 +402,7 @@ function createScheduleTable($day, $conn,$quarter) {
     
 
  
-        echo "<div class='container' id='tablecont' ><table width='' class='table table-bordered theTable' border='1' style='background-color: rgba(242, 242, 242, 0.6);'>
+        echo "<div class='cont' id='tablecont' ><table width='' class='table table-bordered theTable' border='1' style='background-color: rgba(242, 242, 242, 0.6);'>
         <thead>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
@@ -422,7 +428,15 @@ function createScheduleTable($day, $conn,$quarter) {
             echo "<td style='   text-align: center;'>";
 
             if ($row['Start_Time'] !== null) {
-                echo date("h:i A", strtotime($row['Start_Time']));
+               // echo date("h:i A", strtotime($row['Start_Time']));
+
+               $start_time = $row['Start_Time'];
+               list($hour, $minute, $second) = explode(':', $start_time);
+               
+               $timestamp = strtotime("$hour:$minute:$second -1 minute");
+               $formattedTime = date("h:i A", $timestamp);
+               
+               echo $formattedTime; 
             } else {
                 echo '-----';
             }
@@ -487,7 +501,19 @@ function createScheduleTable($day, $conn,$quarter) {
             // echo "<td style=\"background-color: #F1F1F1;\">" . $row['room'] . "</td>";
             echo "<td style=\"background-color: #F1F1F1;\">" . $row['blocks'] . "</td>";
             echo "<td style=\"background-color: #F1F1F1;\">" . $row['faculty'] . "</td>";
-            echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['Start_Time'])) . "</td>";
+
+                    $start_time = $row['Start_Time'];
+                    list($hour, $minute, $second) = explode(':', $start_time);
+                    
+                    $timestamp = strtotime("$hour:$minute:$second -1 minute");
+                    $formattedTime = date("h:i A", $timestamp);
+                    
+                    echo "<td style=\"background-color: #F1F1F1;\">" . $formattedTime . "</td>";           
+
+
+          //echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['Start_Time'])) . "</td>";
+         
+
             echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['End_Time'])) . "</td>";
 
             // echo "<td class=\"statusRow\" style=\"text-align: center;\">";

@@ -322,7 +322,7 @@ function fadeOut(element) {
 <button type="button" class="btn btn-primary" id="First">1st yr</button>
 <button type="button" class="btn btn-primary" id="Second">2nd yr</button>
 <button type="button" class="btn btn-primary" id="Third">3rd yr</button>
-<button type="button" class="btn btn-primary" id="Fourt">4rt yr</button>
+<button type="button" class="btn btn-primary" id="Fourt">4th yr</button>
 <button type="button" class="btn btn-danger" id="toggleButton" onclick="myFunction(this)">1st Sem</button>
 </div>
 

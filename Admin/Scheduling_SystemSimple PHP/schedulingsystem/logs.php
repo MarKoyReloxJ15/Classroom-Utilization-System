@@ -56,7 +56,7 @@ td {
         die("Couldn't connect to the database: " . $conn->connect_error);
     }
 
-    $query = "SELECT * FROM logs ";
+    $query = "SELECT * FROM logs ORDER BY ID_logs DESC";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();

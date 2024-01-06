@@ -11,12 +11,34 @@
   margin: 0;
   padding: 0;
 }
+.logoutDiv{
+  position: relative;
+  background-color: green;
+  height: 1vw;
+  margin-bottom: 0;
+  
+}
 
 .lgout {
-  position: absolute;
-  top: 1.6%;
-  right: 2%;
-  font-size: 500%;
+ float: right;
+ position: absolute;
+ font-size: 3vw; 
+ right: 0.5;
+ padding: 0;
+ color: red;
+ z-index: 20;
+ 
+  
+}
+
+.lgout:hover{
+  color: #bc544b;
+  cursor: pointer;
+  -webkit-transition: color 2s ease-out;
+  -moz-transition: color 2s ease-out;
+  -o-transition: color 2s ease-out;
+  transition:  color 2s ease-out;
+
 }
 
 .green-bg {
@@ -60,10 +82,10 @@
 }
 
 @media only screen and (max-width:800px){
-        .lgout {
+        /* .lgout {
           top: 0.6%;
         font-size: 200%;
-      }
+      } */
 
          
 
@@ -77,9 +99,14 @@
       height: 5%;
     
     }
-            
 
-
+    .lgout{
+      border-radius: 1vw;  
+      border:1px solid black;   
+      background-color:rgb(255, 0, 0, 0.9);
+      color: #1434A4;
+      padding: 0.3vw;
+    }
           }
        
 
@@ -89,14 +116,18 @@
 </style>
 </head>
 <body>
+  
+<div class="logoutDiv"><a href="#"   title="Logout" onclick="logoutConfirmation()"><i id='logoutIcon' class="fas fa-sign-out-alt lgout">Logout</i></a>
+</div>
+
+<!-- <a href="#"   title="Logout" onclick="logoutConfirmation()"><i id='logoutIcon' class="fas fa-sign-out-alt lgout" style="color: red;"></i></a> -->
 
 <div class="green-bg">
   <div class="scholName">
     <img class="scholNLogo" src="rsuLogo.png" alt="Hello to the world">
     <h1>Romblon State University</h1> <h1>-Cajidiocan Campus</h1>
     
-  </div>
- 
+  </div> 
 
 </div>
 
@@ -104,8 +135,6 @@
   <h4>Classroom Utilization Management System (I.T. Dep.)</h4>
 </div>
 
-
-<a href="#"   title="Logout" onclick="logoutConfirmation()"><i id='logoutIcon' class="fas fa-sign-out-alt lgout" style="color: red;"></i></a>
 
 
 <script>

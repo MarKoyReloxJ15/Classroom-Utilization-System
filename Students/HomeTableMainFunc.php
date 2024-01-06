@@ -72,17 +72,46 @@ td a {
             transition-duration: 1s;
         }
 
+        /* ========================================= */
+        .cont {
+            width: 90%;
+            margin:0 auto;
+            padding: 0;
+
+        }
+
+        .redbut{
+            cursor: pointer;
+        }
+
+        @media (max-width: 640px) {
+            .hide-column {
+                display: none;
+            }
+           
+
+
+        }
+
+        /* ============================= */
+        @media only screen and (max-width: 400px){
+            body *{
+            font-size: 16px;
+        }
+        }
+       
+
         .statusAvaiBut{
             border-radius: 1vw;
         }
       
 
-       
+/*        
         @media (max-width: 650px){
             .container{
             padding: 0;
         }
-        }
+        } */
         @media (max-width: 500px) {
             .hide-column {
                 display: none;
@@ -280,7 +309,7 @@ function statusFunc($faculty,$startTime,$endTime,$room){
 
                             // echo "No Schedule found.";
                             // echo "Nonfaculty";
-                            echo "Unfaculty";
+                            echo "No Faculty";
                         }
                         
                         // Free the result set
@@ -331,7 +360,7 @@ function createScheduleTable($day, $conn,$quarter) {
     
 
  
-        echo "<div class='container' id='tablecont' ><table width='' class='table table-bordered theTable' border='1' style='background-color: rgba(242, 242, 242, 0.6);'>
+        echo "<div class='cont' id='tablecont' ><table width='' class='table table-bordered theTable' border='1' style='background-color: rgba(242, 242, 242, 0.6);'>
         <thead>
                 <tr><th colspan=\"7\" style=\"background-color: #008000; color: white;text-align:center\">$day</th></tr>
                 <tr>
@@ -357,7 +386,16 @@ function createScheduleTable($day, $conn,$quarter) {
             echo "<td style='   text-align: center;'>";
 
             if ($row['Start_Time'] !== null) {
-                echo date("h:i A", strtotime($row['Start_Time']));
+                 // echo date("h:i A", strtotime($row['Start_Time']));
+
+               $start_time = $row['Start_Time'];
+               list($hour, $minute, $second) = explode(':', $start_time);
+               
+               $timestamp = strtotime("$hour:$minute:$second -1 minute");
+               $formattedTime = date("h:i A", $timestamp);
+               
+               echo $formattedTime; 
+
             } else {
                 echo '-----';
             }
@@ -422,7 +460,14 @@ function createScheduleTable($day, $conn,$quarter) {
             // echo "<td style=\"background-color: #F1F1F1;\">" . $row['room'] . "</td>";
             echo "<td style=\"background-color: #F1F1F1;\">" . $row['blocks'] . "</td>";
             echo "<td style=\"background-color: #F1F1F1;\">" . $row['faculty'] . "</td>";
-            echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['Start_Time'])) . "</td>";
+            // echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['Start_Time'])) . "</td>";
+                        $start_time = $row['Start_Time'];
+                        list($hour, $minute, $second) = explode(':', $start_time);
+                        
+                        $timestamp = strtotime("$hour:$minute:$second -1 minute");
+                        $formattedTime = date("h:i A", $timestamp);
+                        
+                        echo "<td style=\"background-color: #F1F1F1;\">" . $formattedTime . "</td>";      
             echo "<td  style=\"background-color: #F1F1F1;\">" . date("h:i A", strtotime($row['End_Time'])) . "</td>";
 
             // echo "<td class=\"statusRow\" style=\"text-align: center;\">";
