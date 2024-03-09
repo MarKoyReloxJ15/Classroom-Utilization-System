@@ -1,83 +1,6 @@
 <?php
 //include_once("header.php");
-?>
-
-
-
-<?php
- include_once('heartbeat.php');
-?>
-
-
-
-
-<?php
-
-
-if(isset($_SESSION['username'])) {
-    // User is logged in
-    $username = $_SESSION['username'];
-    $deviceusername = $username;
-} else {
-    $deviceusername = 'You are not logged in'; // Updated message
-    // header('Location: ../index.php'); // Redirect to the login page or homepage
-    // exit(); // Make sure to exit the script after redirecting
-}
-?>
-
-
-<?php
-
-require_once "config.php";
-
-date_default_timezone_set('Asia/Manila');
-
-if (isset($_POST['action']) && $_POST['action'] == 'insert_data') {
-    $buttonId = isset($_POST['button_id']) ? $_POST['button_id'] : '';
-    $name = isset($_POST['name']) ? $_POST['name'] : '';
-    $room = isset($_POST['room']) ? $_POST['room'] : '';
-    $startTime = isset($_POST['start_time']) ? $_POST['start_time'] : '';
-    $endTime = isset($_POST['end_time']) ? $_POST['end_time'] : '';
-
-    // Connect to your MySQL database
-    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
- 
-    $currenttimestamp = date("Y-m-d");
-   
-    // Check if the data already exists in the database
-    $sqlCheck = "SELECT COUNT(*) as count FROM request_table WHERE name = '$name' AND request_room = '$room' AND req_starttime = '$startTime' AND req_endtime = '$endTime' AND  day_req= '$currenttimestamp'";
-    $result = $conn->query($sqlCheck);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if ($row['count'] > 0) {
-            echo "Data already exists. Duplicate not inserted.";
-        } else {
-            // Insert data into your MySQL table (request_table)
-            $timestamp = date("Y-m-d"); // Current timestamp
-            $sqlInsert = "INSERT INTO request_table (name, request_room, req_starttime, req_endtime, day_req) 
-                          VALUES ('$name', '$room', '$startTime', '$endTime', '$timestamp')";
-            
-            if ($conn->query($sqlInsert) === TRUE) {
-                echo "Data inserted successfully.";
-            } else {
-                echo "Error: " . $sqlInsert . "<br>" . $conn->error;
-            }
-        }
-    } else {
-        echo "Error checking duplicate data: " . $conn->error;
-    }
-
-    $conn->close();
-}
-
-
-
-
+require_once("backend/config.php");
 ?>
 
 
@@ -90,89 +13,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert_data') {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="icon" href="rsuLogo.png" type="image/x-icon"/>   
-
+    <link rel="stylesheet" href="style/HomeTableMainFunc.style.css">
     <title>Classroom Utilization Management System</title>
 
     <style>
-        /* body *{
-            font-size: 25px;
-        } */
-        
-body::before {
-    content: "";
-    background-image: url(rsuLogo.png);
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    opacity: 0.08;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
-td a {
-        margin  : 0%; /* Adjust the value as needed */
-        }
-        th{
-            text-align: center;
-            background-color: rgb(192,192,192,.2);
-        }
-       
-        table th td{
-                /* font-size: 100px; */
-                font-size: 4vw;
-               
-            }
-
-        .officialTable{
-            display: none;
-           
-            
-        }
-
-        .switchBut{
-            cursor:pointer;
-            border-radius: 1vw;
-            
-        }
-       
-        .switchBut:hover{
-            background-color: beige;
-            transition-duration: 1s;
-        }
-
-        .statusAvaiBut{
-            border-radius: 1vw;
-        }
-         .cont {
-            width: 90%;
-            margin:0 auto;
-            padding: 0;
-
-        }
-
-        .redbut{
-            cursor: pointer;
-        }
-
-        @media (max-width: 640px) {
-            .hide-column {
-                display: none;
-            }
-           
-
-
-        }
-
-        
-        @media only screen and (max-width: 400px){
-            body *{
-            font-size: 16px;
-        }
-        }
-       
+   
     </style>
 </head>
 
@@ -596,164 +441,15 @@ roomScheduleTable($currentDay,$quarter,$quarter);
 
 ?>
 
-
-
-
-
-
-
-
 <?php
 // include_once("navbar.php");
 ?>
 
 <!-- Add Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="heartbeat.js"></script>
+<script src="script/heartbeat.js"></script>
 
-<script>
-
-// if (window.innerWidth <= 600) {
-//     var elements = document.querySelectorAll('.hide-column');
-//     elements.forEach(function(element) {
-//             element.style.display = 'none';
-//         });
-//   }
-
-
-
-         document.addEventListener("DOMContentLoaded", function() {
-        var searchBtn = document.getElementById("searchBtn");
-        searchBtn.addEventListener("click", function() {
-            var searchValue = document.getElementById("search").value.toLowerCase();
-            var rows = document.querySelectorAll("tbody tr");
-            rows.forEach(function(row) {
-                var cells = row.getElementsByTagName("td");
-                var found = false;
-                Array.from(cells).forEach(function(cell) {
-                    if (cell.textContent.toLowerCase().includes(searchValue)) {
-                        found = true;
-                    }
-                });
-                if (found) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        });
-
-        var refreshBtn = document.getElementById("refreshBtn");
-        refreshBtn.addEventListener("click", function() {
-            location.reload();
-        });
-
-        var startTimeHeader = document.querySelector("thead th:nth-child(5)");
-        startTimeHeader.addEventListener("click", function() {
-            sortRowsByStartTime();
-        });
-
-        function sortRowsByStartTime() {
-            var tableBody = document.querySelector("tbody");
-            var rows = Array.from(tableBody.getElementsByTagName("tr"));
-
-            rows.sort(function(rowA, rowB) {
-                var startTimeA = rowA.querySelector("td:nth-child(5)").textContent.trim();
-                var startTimeB = rowB.querySelector("td:nth-child(5)").textContent.trim();
-
-                var timeA = new Date("1970/01/01 " + startTimeA);
-                var timeB = new Date("1970/01/01 " + startTimeB);
-
-                return timeA - timeB;
-            });
-
-            rows.forEach(function(row) {
-                tableBody.appendChild(row);
-            });
-        }
-
-      
-
-        sortRowsByStartTime();
-    });
-
-
-    function myFunction() {
-    var x = document.getElementById("tablecont");
-    var officialTables = document.getElementsByClassName("officialTable");
-
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        for (var i = 0; i < officialTables.length; i++) {
-            officialTables[i].style.display = "none";
-        }
-    } else {
-        x.style.display = "none";
-        for (var i = 0; i < officialTables.length; i++) {
-            officialTables[i].style.display = "block";
-        }
-    }
-}
-
-// ====================================
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll("[data-button-id]");
-
-    buttons.forEach(button => {
-        button.addEventListener("click", function() {
-            const buttonId = this.getAttribute("data-button-id");
-            const name = this.getAttribute("data-name");
-            const room = this.getAttribute("data-room");
-            const startTime = this.getAttribute("data-starttime");
-            const endTime = this.getAttribute("data-endtime");
-            executePHPFunction(buttonId, name, room, startTime, endTime);
-        });
-    });
-});
-
-function executePHPFunction(buttonId, name, room, startTime, endTime) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            // alert(xhr.responseText); // Display the response, you can update this as needed
-            alert("Request Send.");
-        }
-    };
-
-    xhr.send("action=insert_data&button_id=" + encodeURIComponent(buttonId) +
-             "&name=" + encodeURIComponent(name) +
-             "&room=" + encodeURIComponent(room) +
-             "&start_time=" + encodeURIComponent(startTime) +
-             "&end_time=" + encodeURIComponent(endTime));
-}
-
-
-// ===============================
-    
-
-function reserveRoom(name, room) {
-    // Construct the message using template literals for readability
-    const message = `${room} is currently reserved for ${name}`;
-
-    // Display the message in an alert dialog
-    alert(message);
-}
-
-
-function occupiedRoom(name, room){
-       // Construct the message using template literals for readability
-       const message = `${room} is currently occupied for ${name}`;
-
-        // Display the message in an alert dialog
-        alert(message);
-
-}
-          </script>
+<script src="script/HomeTableMainFunc.script.js"></script>
 </body>
 </html>
 

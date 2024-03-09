@@ -1,44 +1,10 @@
 
 
-<?php
-require_once "config.php";
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $name = $_POST["name"];
-    $studentID = $_POST["studentID"];
-
-    // Create a new PDO instance
-    $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
-
-    // Check if the student exists in the student table
-    $stmt = $pdo->prepare("SELECT student_name, studentID FROM student WHERE student_name = ?");
-    $stmt->execute([$name]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($studentID, $user['studentID'])) {
-        // Student exists in the student table and matches the hashed studentID
-        // Delete the account
-        $deleteStmt = $pdo->prepare("DELETE FROM student WHERE student_name = ?");
-        $deleteStmt->execute([$name]);
-
-        echo "<script>alert('Account deleted successfully!');</script>";
-        header("Location: student_register.php");
-        exit();
-    } else {
-        // Student not found in the database or studentID doesn't match
-        echo "<script>alert('Student not found in the database or studentID does not match!');</script>";
-    }
-}
-
-
-    
-?>
-
 
 
 <?php
 include('rsuHeader.php');
+require_once "backend/config.php";
 
 ?>
 
@@ -48,123 +14,9 @@ include('rsuHeader.php');
 
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="style/studentForgetPassword.style.css">
     <style>
         
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        .container{
-           
-        }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            /* background-color: rgba(255, 255, 255, 0.1); */
-          
-            width: 300px;
-            position: relative;
-            margin: 0 auto;
-            margin-top: 2%;
-            
-            /* width: 80%; */
-            background-color: rgb(250,248,245,0.4);
-        }
-
-        select {
-            width: 90%;
-            padding: 10px;
-            box-sizing:content-box;
-            border: 2px solid black;
-      border-radius: 10px;
-            /* border: 1px solid #ccc;
-            border-radius: 4px; */
-           
-        }
-
-        select option {
-            padding: 5px;
-           
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        button {
-            background-color: blue;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 90%;
-            padding: 10px;
-            border: 2px solid black;
-      border-radius: 10px;
-            /* border: 1px solid #ccc;
-            border-radius: 4px; */
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        .password-toggle {
-  float: right;
-   
-}
-
-.password-toggle:hover {
-    color: #333;
-}
-
-/* =========================================== */
-
-.autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  max-height: 150px;
-  overflow-y: auto;
-  z-index: 999; /* Set a high z-index value */
-}
-
-.autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff; 
-  border-bottom: 1px solid #d4d4d4; 
-}
-
-/* When hovering an item: */
-.autocomplete-items div:hover {
-  background-color: #e9e9e9; 
-}
-
-/* When navigating through the items using the arrow keys: */
-.autocomplete-active {
-  background-color: DodgerBlue !important; 
-  color: #ffffff; 
-}
 
     </style>
 
@@ -177,7 +29,7 @@ include('rsuHeader.php');
 
 <body>
     
-    <form method="POST" action="studentForgetPassword.php">
+    <form method="POST" action="backend/studentForgetPassword.backend.php">
         <h2>Student Registration Form </h2>
 
         <div class="autocomplete" style="width:300px;">

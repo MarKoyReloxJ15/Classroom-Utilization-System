@@ -1,0 +1,116 @@
+     
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container{
+           
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            /* background-color: rgba(255, 255, 255, 0.1); */
+          
+            width: 300px;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 2%;
+            
+            /* width: 80%; */
+            background-color: rgb(250,248,245,0.4);
+        }
+
+        select {
+            width: 90%;
+            padding: 10px;
+            box-sizing:content-box;
+            border: 2px solid black;
+      border-radius: 10px;
+            /* border: 1px solid #ccc;
+            border-radius: 4px; */
+           
+        }
+
+        select option {
+            padding: 5px;
+           
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        button {
+            background-color: blue;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            border: 2px solid black;
+      border-radius: 10px;
+            /* border: 1px solid #ccc;
+            border-radius: 4px; */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .password-toggle {
+  float: right;
+   
+}
+
+.password-toggle:hover {
+    color: #333;
+}
+
+/* =========================================== */
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 999; /* Set a high z-index value */
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/* When hovering an item: */
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/* When navigating through the items using the arrow keys: */
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}

@@ -1,0 +1,110 @@
+ /* .scholNLogo {
+      position: relative;
+      width: 8%;
+      height: 70%;
+      margin-right: 10px;
+    }
+
+    .scholName {
+
+      position: relative;
+      height: 100%;
+      background-color: #00AF50;
+      border-radius: 1px;
+      border: 1px solid #41719C;
+
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    } */
+
+    /* body {
+      position: relative;
+    } */
+
+    /* body::before {
+      content: "";
+      background-image: url(rsuLogo.png);
+      width: 90%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      opacity: 0.1;
+      position: absolute;
+      top: 20%;
+      left: 4.5%;
+      right: 0;
+      bottom: 0;
+
+    } */
+
+    .login-container {
+        position: relative;
+        background-color: #ffffff;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.1);
+        /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
+        margin: 100px auto;
+        max-width: 270px;
+        padding: 10px;
+        top: -80px;
+      }
+  
+      h2 {
+        text-align: center;
+      }
+  
+      form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        
+      }
+  
+      input[type="text"],
+      input[type="password"] {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 2px solid black;
+        border-radius: 10px;
+      }
+  
+      button {
+        background-color: green;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 10px;
+      }
+  
+      button:hover {
+        background-color: black;
+      }
+  
+      .error {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+      }
+  
+      .c-button {
+        background-color: blue;
+      }
+  
+  
+      .password-container {
+      position: relative;
+    }
+  
+    .password-toggle {
+      position: absolute;
+      top: 40%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    #passwordField {
+      width: 90%; /* Set the desired width */
+    }

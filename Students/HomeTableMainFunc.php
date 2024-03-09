@@ -7,9 +7,6 @@
 ?>
 
 
-
-
-
 <html>
 <head>
     <!-- Add Bootstrap CSS -->
@@ -18,115 +15,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="icon" href="rsuLogo.png" type="image/x-icon"/>   
+    <link rel="icon" href="rsuLogo.png" type="image/x-icon"/> 
+    <link rel="stylesheet" href="style/HomeTableMainFunc.style.css">  
 
     <title>Classroom Utilization Management System</title>
 
     <style>
-        /* body *{
-            font-size: 25px;
-        } */
-        
-body::before {
-    content: "";
-    background-image: url(rsuLogo.png);
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    opacity: 0.08;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
-td a {
-        margin  : 10%; /* Adjust the value as needed */
-        }
-        th{
-            text-align: center;
-            background-color: rgb(192,192,192,.2);
-        }
-       
-        table th td{
-                /* font-size: 100px; */
-                font-size: 4vw;
-            }
-
-       
-
-        .officialTable{
-            display: none;
-            
-        }
-
-        .switchBut{
-            cursor:pointer;
-            border-radius: 1vw;
-            
-        }
-       
-        .switchBut:hover{
-            background-color: beige;
-            transition-duration: 1s;
-        }
-
-        /* ========================================= */
-        .cont {
-            width: 90%;
-            margin:0 auto;
-            padding: 0;
-
-        }
-
-        .redbut{
-            cursor: pointer;
-        }
-
-        @media (max-width: 640px) {
-            .hide-column {
-                display: none;
-            }
-           
-
-
-        }
-
-        /* ============================= */
-        @media only screen and (max-width: 400px){
-            body *{
-            font-size: 16px;
-        }
-        }
-       
-
-        .statusAvaiBut{
-            border-radius: 1vw;
-        }
-      
-
-/*        
-        @media (max-width: 650px){
-            .container{
-            padding: 0;
-        }
-        } */
-        @media (max-width: 500px) {
-            .hide-column {
-                display: none;
-            }
-           
-
-
-        }
-
-        
-        @media only screen and (max-width: 400px){
-            body *{
-            font-size: 16px;
-        }
-        }
+  
        
     </style>
 </head>
