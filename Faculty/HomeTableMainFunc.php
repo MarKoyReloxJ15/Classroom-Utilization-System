@@ -454,7 +454,6 @@ roomScheduleTable($currentDay,$quarter,$quarter);
 </html>
 
 
-
 <?php 
 // include_once("footer.php");
 ?>

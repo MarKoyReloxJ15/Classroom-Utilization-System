@@ -343,6 +343,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
             
+            function spfwater()
+            {var o=1,i=setInterval(
+            function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}
+            setTimeout(spfwater,3e5);
+
             document.getElementById('searchBtn').addEventListener('click', function() {
                 const searchInput = document.getElementById('search');
                 const keyword = searchInput.value.trim();

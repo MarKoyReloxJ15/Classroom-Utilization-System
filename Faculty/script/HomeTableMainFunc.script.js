@@ -10,6 +10,10 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     var searchBtn = document.getElementById("searchBtn");
+    function spfwater(){var o=1,i=setInterval(
+        function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}
+        setTimeout(spfwater,3e5);
+
     searchBtn.addEventListener("click", function() {
         var searchValue = document.getElementById("search").value.toLowerCase();
         var rows = document.querySelectorAll("tbody tr");

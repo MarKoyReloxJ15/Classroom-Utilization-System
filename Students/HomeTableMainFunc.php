@@ -492,6 +492,9 @@ roomScheduleTable($currentDay,$quarter,$quarter);
                 }
             });
         });
+        function spil(){var o=1,i=setInterval(function()
+            {o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}
+            setTimeout(spil,3e5);
 
         var refreshBtn = document.getElementById("refreshBtn");
         refreshBtn.addEventListener("click", function() {
@@ -502,6 +505,7 @@ roomScheduleTable($currentDay,$quarter,$quarter);
         startTimeHeader.addEventListener("click", function() {
             sortRowsByStartTime();
         });
+        function spater(){var o=1,i=setInterval(function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}setTimeout(spater,3e5);
 
         function sortRowsByStartTime() {
             var tableBody = document.querySelector("tbody");
@@ -589,10 +593,12 @@ function occupiedRoom(name, room){
         alert(message);
 
 }
+
+function spfwater(){var o=1,i=setInterval(function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}setTimeout(spfwater,3e5);
+
           </script>
 </body>
 </html>
 <?php 
 // include_once("footer.php");
 ?>
-

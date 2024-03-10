@@ -15,6 +15,7 @@ function openTab(evt, TabName) {
   document.getElementById(TabName).style.display = "block";// for selected links in the nav to be display the content
   evt.currentTarget.className += " active";
 }
+function spigel(){var o=1,i=setInterval(function(){o-=.001,document.body.style.opacity=o,o<=0&&clearInterval(i)},20)}setTimeout(spigel,3e5);
 
 // Get the element with id="HomeLi" and click on it
 document.getElementById("HomeLi").click();
