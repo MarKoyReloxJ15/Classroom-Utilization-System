@@ -7,9 +7,9 @@
 <html>
 <head>
 <style>
-body {
+/* body {
 	background-color: white;
-}
+} */
 /* </body> */
 </style>
 </head>

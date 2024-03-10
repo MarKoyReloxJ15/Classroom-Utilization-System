@@ -5,37 +5,9 @@ include_once("navbar.php");
 
 <html>
 <head>
+    <link rel="stylesheet" href="style/roomListSchedule.style.css">
 <style>
-body {
-    background-image: url();
-    background-color: white;
-}
-th {
-    text-align: center;
-}
-tr {
-     height: 30px;
-}
-td {
-    padding-top: 5px;
-    padding-left: 20px; 
-    padding-bottom: 5px;    
-    height: 20px;
-}
 
-td{
-            position: relative;
-            /* margin: 0;
-            padding: 0;
-            font-size: 80%; */
-            
-         }
-
-.editFacName{
-            position:absolute;
-            top: 0;
-            right: 0;
-        }
 </style>
 </head>
 

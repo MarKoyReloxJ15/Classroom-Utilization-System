@@ -11,54 +11,9 @@
 
 
   <title>Classroom Utilization Management System</title>
+  <link rel="stylesheet" href="style/tablelist.style.css">
 <style>
 
-
-.navbar {
-    background-color: beige;
-    border-radius: 10px;
-    margin-bottom: 0;
-}
-
-.navbar ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    justify-content: center;
-}
-
-.navbar li {
-    margin-right: 15px;
-}
-
-.navbar a {
-    text-decoration: none;
-    color: #333;
-    padding: 8px 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.navbar a:hover {
-    background-color: #333;
-    color: #fff;
-    border-color: #333;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .navbar ul {
-        flex-wrap: wrap;
-    }
-
-    .navbar li {
-        margin-right: 0;
-        margin-bottom: 10px; /* Add space below each list item for better appearance */
-    }
-}
 </style>
 <script>
     window.onload = function() {
