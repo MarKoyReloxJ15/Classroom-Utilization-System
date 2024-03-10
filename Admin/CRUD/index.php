@@ -6,44 +6,9 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/index.style.css">
     <style type="text/css">
-         html, body {
-    background-color: transparent;
-  }
-
-
-  
-        .wrapper{
-            width: 650px;
-            margin: 0 auto;
-        }
-        .page-header h2{
-            margin-top: 0;
-        }
-        table tr td:last-child a{
-            margin-right: 15px;
-        }
-
-
-       
-        .search-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        margin-bottom: 10px;
-    }
-    .search-wrapper .form-group {
-        margin-bottom: 0;
-    }
-    .search-wrapper .form-group,
-    .search-wrapper .buttons {
-        flex-shrink: 0;
-    }
-    .search-wrapper .form-group input {
-        margin-left: 10px;
-    }
-
-
+    
     </style>
     <script type="text/javascript">
         $(document).ready(function(){

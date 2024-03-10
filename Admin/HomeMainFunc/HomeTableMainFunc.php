@@ -16,31 +16,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="style/HomeTableMainFunc.style.css">
     <style>
-        html, body {
-    background-color: transparent;
-  }
-  /* #myMainTable{
-     display: none; 
-  } */
- 
-        .officialTable{
-            display: none;
-        }
-     
-        .switchBut{
-            cursor:pointer;
-            border-radius: 1vw;
-        }
-        .switchBut:hover{
-            background-color: beige;
-            transition-duration: 1s;
-        }
-       
-        .statusAvaiBut{
-            border-radius: 1vw;
-        }
+
     </style>
 </head>
 

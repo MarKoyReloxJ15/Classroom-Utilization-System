@@ -2,45 +2,11 @@
  include_once("header.php");
 ?>
 <style>
-.contNav {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-}
-
-.navbar-horizontal {
-    display: flex;
-    justify-content: center;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.navbar-horizontal .nav > li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-.navbar-horizontal .nav > li > a {
-    color: #333;
-    border-radius: 5px;
-    padding: 10px 15px;
-}
-
-.navbar-horizontal .nav > li > a:hover,
-.navbar-horizontal .nav > li > a:focus {
-    background-color: #e9ecef;
-    color: #333;
-}
-
-
-
-
 
 </style>
 <html>
 <head>
+    <link rel="stylesheet" href="style/navbar.style.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

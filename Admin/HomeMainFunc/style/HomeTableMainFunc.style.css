@@ -1,0 +1,23 @@
+html, body {
+    background-color: transparent;
+  }
+  /* #myMainTable{
+     display: none; 
+  } */
+ 
+        .officialTable{
+            display: none;
+        }
+     
+        .switchBut{
+            cursor:pointer;
+            border-radius: 1vw;
+        }
+        .switchBut:hover{
+            background-color: beige;
+            transition-duration: 1s;
+        }
+       
+        .statusAvaiBut{
+            border-radius: 1vw;
+        }
